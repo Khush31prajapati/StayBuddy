@@ -714,7 +714,7 @@ export default function PropertyDetailsPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Image Gallery */}
-      <div className="relative h-[500px] bg-gray-900">
+      <div className="relative h-[300px] sm:h-[400px] md:h-[450px] lg:h-[480px] bg-gray-900">
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={currentImageIndex}
@@ -741,13 +741,13 @@ export default function PropertyDetailsPage() {
             {property.propertyType === "PG" && selectedSpaceType === "rooms" && property.roomsAvailability && property.roomsAvailability[currentImageIndex] && (
               <>
                 {/* Status Badge */}
-                <div className="absolute top-6 right-6 z-20">
+                <div className="absolute top-3 right-3 sm:top-4 sm:right-4 md:top-6 md:right-6 z-20">
                   {property.roomsAvailability[currentImageIndex].status === "sold" ? (
-                    <span className="px-6 py-1.5 bg-red-600 text-white text-lg font-semibold rounded-full shadow-2xl">
+                    <span className="px-3 py-1 sm:px-4 sm:py-1.5 md:px-6 md:py-1.5 bg-red-600 text-white text-xs sm:text-sm md:text-base lg:text-lg font-semibold rounded-full shadow-2xl">
                       {t.sold}
                     </span>
                   ) : (
-                    <span className="px-6 py-1.5 bg-green-600 text-white text-lg font-semibold rounded-full shadow-2xl">
+                    <span className="px-3 py-1 sm:px-4 sm:py-1.5 md:px-6 md:py-1.5 bg-green-600 text-white text-xs sm:text-sm md:text-base lg:text-lg font-semibold rounded-full shadow-2xl">
                       {t.available}
                     </span>
                   )}
@@ -756,20 +756,20 @@ export default function PropertyDetailsPage() {
                 {/* Sold Overlay */}
                 {property.roomsAvailability[currentImageIndex].status === "sold" && (
                   <div className="absolute inset-0 bg-red-900/40 flex items-center justify-center z-10">
-                    <span className="text-white text-8xl font-bold transform -rotate-12 opacity-60 drop-shadow-2xl">
+                    <span className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold transform -rotate-12 opacity-60 drop-shadow-2xl">
                       {t.sold}
                     </span>
                   </div>
                 )}
 
                 {/* Room Name Label */}
-                <div className="absolute bottom-24 left-6 z-20">
-                  <div className={`px-6 py-2 rounded-xl shadow-2xl ${
+                <div className="absolute bottom-16 sm:bottom-20 md:bottom-24 left-3 sm:left-4 md:left-6 z-20">
+                  <div className={`px-3 py-1.5 sm:px-4 sm:py-2 md:px-6 md:py-2 rounded-lg sm:rounded-xl shadow-2xl ${
                     property.roomsAvailability[currentImageIndex].status === "sold"
                       ? "bg-red-600/90 text-white"
                       : "bg-green-600/90 text-white"
                   }`}>
-                    <p className="text-lg font-semibold">
+                    <p className="text-sm sm:text-base md:text-lg font-semibold">
                       {property.roomsAvailability[currentImageIndex].name}
                     </p>
                   </div>
@@ -782,19 +782,19 @@ export default function PropertyDetailsPage() {
         {/* Navigation Arrows */}
         <button
           onClick={prevImage}
-          className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center z-10 shadow-lg transition-all"
+          className="absolute left-2 sm:left-3 md:left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center z-10 shadow-lg transition-all"
         >
-          <ChevronLeft className="w-6 h-6 text-gray-800" />
+          <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-gray-800" />
         </button>
         <button
           onClick={nextImage}
-          className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center z-10 shadow-lg transition-all"
+          className="absolute right-2 sm:right-3 md:right-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center z-10 shadow-lg transition-all"
         >
-          <ChevronRight className="w-6 h-6 text-gray-800" />
+          <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-gray-800" />
         </button>
 
         {/* Image Indicators */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+        <div className="absolute bottom-2 sm:bottom-3 md:bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 sm:gap-2 z-10">
           {currentImages.map((_: any, index: number) => (
             <button
               key={index}
@@ -802,10 +802,10 @@ export default function PropertyDetailsPage() {
                 setDirection(index > currentImageIndex ? 1 : -1);
                 setCurrentImageIndex(index);
               }}
-              className={`h-2 rounded-full transition-all duration-300 ${
+              className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 ${
                 index === currentImageIndex
-                  ? "w-8 bg-white"
-                  : "w-2 bg-white/60 hover:bg-white/80"
+                  ? "w-6 sm:w-8 bg-white"
+                  : "w-1.5 sm:w-2 bg-white/60 hover:bg-white/80"
               }`}
             />
           ))}
@@ -815,11 +815,11 @@ export default function PropertyDetailsPage() {
       {/* Space Type Filter Buttons - Only for PG properties */}
       {property.propertyType === "PG" && (
         <div className="bg-white border-b border-gray-200 shadow-sm">
-          <div className="max-w-7xl mx-auto px-6 py-4">
-            <div className="flex gap-3 overflow-x-auto">
+          <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-3 sm:py-4">
+            <div className="flex gap-2 sm:gap-3 overflow-x-auto scrollbar-hide">
               <button
                 onClick={() => handleSpaceTypeChange("rooms")}
-                className={`px-6 py-3 rounded-lg font-semibold whitespace-nowrap transition-all ${
+                className={`px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 md:py-3 rounded-lg text-xs sm:text-sm md:text-base font-semibold whitespace-nowrap transition-all ${
                   selectedSpaceType === "rooms"
                     ? "bg-primary text-white shadow-md"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -838,7 +838,7 @@ export default function PropertyDetailsPage() {
               {property.kitchenImages && property.kitchenImages.length > 0 && (
                 <button
                   onClick={() => handleSpaceTypeChange("kitchen")}
-                  className={`px-6 py-3 rounded-lg font-semibold whitespace-nowrap transition-all ${
+                  className={`px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 md:py-3 rounded-lg text-xs sm:text-sm md:text-base font-semibold whitespace-nowrap transition-all ${
                     selectedSpaceType === "kitchen"
                       ? "bg-primary text-white shadow-md"
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -850,7 +850,7 @@ export default function PropertyDetailsPage() {
               {property.washroomImages && property.washroomImages.length > 0 && (
                 <button
                   onClick={() => handleSpaceTypeChange("washroom")}
-                  className={`px-6 py-3 rounded-lg font-semibold whitespace-nowrap transition-all ${
+                  className={`px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 md:py-3 rounded-lg text-xs sm:text-sm md:text-base font-semibold whitespace-nowrap transition-all ${
                     selectedSpaceType === "washroom"
                       ? "bg-primary text-white shadow-md"
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -862,7 +862,7 @@ export default function PropertyDetailsPage() {
               {property.commonAreaImages && property.commonAreaImages.length > 0 && (
                 <button
                   onClick={() => handleSpaceTypeChange("commonArea")}
-                  className={`px-6 py-3 rounded-lg font-semibold whitespace-nowrap transition-all ${
+                  className={`px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 md:py-3 rounded-lg text-xs sm:text-sm md:text-base font-semibold whitespace-nowrap transition-all ${
                     selectedSpaceType === "commonArea"
                       ? "bg-primary text-white shadow-md"
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -877,27 +877,27 @@ export default function PropertyDetailsPage() {
       )}
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
-        <div className="grid lg:grid-cols-3 gap-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8">
+        <div className="grid lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2">
             {/* Breadcrumb */}
-            <div className="flex items-center gap-2 text-sm text-gray-600 mb-4">
-              <Link href="/" className="hover:text-primary">{t.home}</Link>
-              <ChevronRight className="w-4 h-4" />
-              <Link href="/properties" className="hover:text-primary">{t.properties}</Link>
-              <ChevronRight className="w-4 h-4" />
-              <span className="text-gray-900">{property.location.split(',')[0]}</span>
+            <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-600 mb-3 sm:mb-4 overflow-x-auto">
+              <Link href="/" className="hover:text-primary whitespace-nowrap">{t.home}</Link>
+              <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+              <Link href="/properties" className="hover:text-primary whitespace-nowrap">{t.properties}</Link>
+              <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+              <span className="text-gray-900 truncate">{property.location.split(',')[0]}</span>
             </div>
 
             {/* Title and Favorite */}
-            <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-6">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-3 sm:gap-4 mb-4 sm:mb-6">
               <div className="flex-1">
-                <div className="flex items-center gap-3 mb-2">
-                  <h1 className="text-3xl font-bold text-gray-900">
+                <div className="flex items-center gap-2 sm:gap-3 mb-2 flex-wrap">
+                  <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">
                     {property.title}
                   </h1>
-                  <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                  <span className={`px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs sm:text-sm font-semibold ${
                     property.propertyType === "PG" 
                       ? "bg-blue-600 text-white" 
                       : "bg-green-600 text-white"
@@ -905,44 +905,45 @@ export default function PropertyDetailsPage() {
                     {property.propertyType}
                   </span>
                 </div>
-                <p className="text-gray-600 flex items-center gap-2">
-                  <MapPin className="w-4 h-4" />
-                  {property.fullAddress}
+                <p className="text-sm sm:text-base text-gray-600 flex items-center gap-1.5 sm:gap-2">
+                  <MapPin className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                  <span className="line-clamp-2">{property.fullAddress}</span>
                 </p>
               </div>
               <button
                 onClick={() => setIsFavorite(!isFavorite)}
-                className={`flex items-center gap-2 px-5 py-3 rounded-xl font-semibold transition-all duration-300 shadow-md hover:shadow-lg ${
+                className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 md:py-3 rounded-lg sm:rounded-xl text-xs sm:text-sm md:text-base font-semibold transition-all duration-300 shadow-md hover:shadow-lg ${
                   isFavorite
                     ? 'bg-red-50 border-2 border-red-500 text-red-600 hover:bg-red-100'
                     : 'bg-white border-2 border-gray-300 text-gray-700 hover:border-primary hover:bg-primary/5 hover:text-primary'
                 }`}
               >
                 <Heart
-                  className={`w-5 h-5 transition-all duration-300 ${
+                  className={`w-4 h-4 sm:w-5 sm:h-5 transition-all duration-300 ${
                     isFavorite ? "fill-red-500 text-red-500 scale-110" : "text-current"
                   }`}
                 />
-                <span className="whitespace-nowrap">{t.addToFavorites}</span>
+                <span className="whitespace-nowrap hidden sm:inline">{t.addToFavorites}</span>
+                <span className="whitespace-nowrap sm:hidden">Favorite</span>
               </button>
             </div>
 
             {/* Description */}
-            <div className="bg-white rounded-xl shadow-md p-6 mb-6">
-              <h3 className="text-sm font-semibold text-gray-500 mb-4">{t.description}</h3>
-              <p className="text-gray-700 leading-relaxed">
+            <div className="bg-white rounded-lg sm:rounded-xl shadow-md p-4 sm:p-5 md:p-6 mb-4 sm:mb-5 md:mb-6">
+              <h3 className="text-xs sm:text-sm font-semibold text-gray-500 mb-3 sm:mb-4">{t.description}</h3>
+              <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                 {property.description}
               </p>
             </div>
 
             {/* Property Details Section */}
-            <div className="bg-white rounded-xl shadow-md p-6 mb-6">
-              <h3 className="text-sm font-semibold text-gray-500 mb-4">{t.propertyDetails}</h3>
+            <div className="bg-white rounded-lg sm:rounded-xl shadow-md p-4 sm:p-5 md:p-6 mb-4 sm:mb-5 md:mb-6">
+              <h3 className="text-xs sm:text-sm font-semibold text-gray-500 mb-3 sm:mb-4">{t.propertyDetails}</h3>
               
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="flex justify-between py-3 border-b border-gray-200">
-                  <span className="text-gray-600">{t.propertyType}</span>
-                  <span className={`font-semibold px-3 py-1 rounded-full text-sm ${
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <div className="flex justify-between py-2 sm:py-3 border-b border-gray-200">
+                  <span className="text-sm sm:text-base text-gray-600">{t.propertyType}</span>
+                  <span className={`font-semibold px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs sm:text-sm ${
                     property.propertyType === "PG" 
                       ? "bg-blue-100 text-blue-700" 
                       : "bg-green-100 text-green-700"
@@ -950,145 +951,145 @@ export default function PropertyDetailsPage() {
                     {property.propertyType}
                   </span>
                 </div>
-                <div className="flex justify-between py-3 border-b border-gray-200">
-                  <span className="text-gray-600">{t.category}</span>
-                  <span className="font-semibold text-gray-900">{property.category}</span>
+                <div className="flex justify-between py-2 sm:py-3 border-b border-gray-200">
+                  <span className="text-sm sm:text-base text-gray-600">{t.category}</span>
+                  <span className="text-sm sm:text-base font-semibold text-gray-900">{property.category}</span>
                 </div>
                 {property.propertyType === "PG" && property.pgFor && (
-                  <div className="flex justify-between py-3 border-b border-gray-200">
-                    <span className="text-gray-600">{t.pgFor}</span>
-                    <span className="font-semibold text-gray-900">{property.pgFor}</span>
+                  <div className="flex justify-between py-2 sm:py-3 border-b border-gray-200">
+                    <span className="text-sm sm:text-base text-gray-600">{t.pgFor}</span>
+                    <span className="text-sm sm:text-base font-semibold text-gray-900">{property.pgFor}</span>
                   </div>
                 )}
                 {property.propertyType === "PG" && property.preferredTenants && (
-                  <div className="flex justify-between py-3 border-b border-gray-200">
-                    <span className="text-gray-600">{t.preferredTenants}</span>
-                    <span className="font-semibold text-gray-900">{property.preferredTenants}</span>
+                  <div className="flex justify-between py-2 sm:py-3 border-b border-gray-200">
+                    <span className="text-sm sm:text-base text-gray-600">{t.preferredTenants}</span>
+                    <span className="text-sm sm:text-base font-semibold text-gray-900">{property.preferredTenants}</span>
                   </div>
                 )}
-                <div className="flex justify-between py-3 border-b border-gray-200">
-                  <span className="text-gray-600">{t.rooms}</span>
-                  <span className="font-semibold text-gray-900">{property.rooms}</span>
+                <div className="flex justify-between py-2 sm:py-3 border-b border-gray-200">
+                  <span className="text-sm sm:text-base text-gray-600">{t.rooms}</span>
+                  <span className="text-sm sm:text-base font-semibold text-gray-900">{property.rooms}</span>
                 </div>
-                <div className="flex justify-between py-3 border-b border-gray-200">
-                  <span className="text-gray-600">{t.bathrooms}</span>
-                  <span className="font-semibold text-gray-900">{property.bathrooms}</span>
+                <div className="flex justify-between py-2 sm:py-3 border-b border-gray-200">
+                  <span className="text-sm sm:text-base text-gray-600">{t.bathrooms}</span>
+                  <span className="text-sm sm:text-base font-semibold text-gray-900">{property.bathrooms}</span>
                 </div>
-                <div className="flex justify-between py-3 border-b border-gray-200">
-                  <span className="text-gray-600">{t.size}</span>
-                  <span className="font-semibold text-gray-900">{property.area} m²</span>
+                <div className="flex justify-between py-2 sm:py-3 border-b border-gray-200">
+                  <span className="text-sm sm:text-base text-gray-600">{t.size}</span>
+                  <span className="text-sm sm:text-base font-semibold text-gray-900">{property.area} m²</span>
                 </div>
-                <div className="flex justify-between py-3 border-b border-gray-200">
-                  <span className="text-gray-600">{t.rent}</span>
-                  <span className="font-semibold text-gray-900">{currencySymbol} {property.price}</span>
+                <div className="flex justify-between py-2 sm:py-3 border-b border-gray-200">
+                  <span className="text-sm sm:text-base text-gray-600">{t.rent}</span>
+                  <span className="text-sm sm:text-base font-semibold text-gray-900">{currencySymbol} {property.price}</span>
                 </div>
-                <div className="flex justify-between py-3 border-b border-gray-200">
-                  <span className="text-gray-600">{t.deposit}</span>
-                  <span className="font-semibold text-gray-900">{currencySymbol} {property.deposit}</span>
+                <div className="flex justify-between py-2 sm:py-3 border-b border-gray-200">
+                  <span className="text-sm sm:text-base text-gray-600">{t.deposit}</span>
+                  <span className="text-sm sm:text-base font-semibold text-gray-900">{currencySymbol} {property.deposit}</span>
                 </div>
-                <div className="flex justify-between py-3 border-b border-gray-200">
-                  <span className="text-gray-600">{t.availableFrom}</span>
-                  <span className="font-semibold text-green-600">{property.availableFrom}</span>
+                <div className="flex justify-between py-2 sm:py-3 border-b border-gray-200">
+                  <span className="text-sm sm:text-base text-gray-600">{t.availableFrom}</span>
+                  <span className="text-sm sm:text-base font-semibold text-green-600">{property.availableFrom}</span>
                 </div>
               </div>
             </div>
 
             {/* Amenities Section */}
-            <div className="bg-white rounded-xl shadow-md p-6 mb-6">
-              <h3 className="text-sm font-semibold text-gray-500 mb-4">{t.amenities}</h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            <div className="bg-white rounded-lg sm:rounded-xl shadow-md p-4 sm:p-5 md:p-6 mb-4 sm:mb-5 md:mb-6">
+              <h3 className="text-xs sm:text-sm font-semibold text-gray-500 mb-3 sm:mb-4">{t.amenities}</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-3">
                 {property.amenities.map((amenity: string, index: number) => (
-                  <div key={index} className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg">
-                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span className="text-gray-700">{amenity}</span>
+                  <div key={index} className="flex items-center gap-2 p-2 sm:p-3 bg-gray-50 rounded-lg">
+                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-500 rounded-full flex-shrink-0"></div>
+                    <span className="text-xs sm:text-sm text-gray-700">{amenity}</span>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Rules Section */}
-            <div className="bg-white rounded-xl shadow-md p-6 mb-6">
-              <h3 className="text-sm font-semibold text-gray-500 mb-4">{t.rules}</h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="flex justify-between py-3 border-b border-gray-200">
-                  <span className="text-gray-600">{t.smoking}</span>
-                  <span className={`font-semibold ${property.rules.smoking === "Allowed" ? "text-green-600" : "text-red-600"}`}>
+            <div className="bg-white rounded-lg sm:rounded-xl shadow-md p-4 sm:p-5 md:p-6 mb-4 sm:mb-5 md:mb-6">
+              <h3 className="text-xs sm:text-sm font-semibold text-gray-500 mb-3 sm:mb-4">{t.rules}</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <div className="flex justify-between py-2 sm:py-3 border-b border-gray-200">
+                  <span className="text-sm sm:text-base text-gray-600">{t.smoking}</span>
+                  <span className={`text-sm sm:text-base font-semibold ${property.rules.smoking === "Allowed" ? "text-green-600" : "text-red-600"}`}>
                     {property.rules.smoking}
                   </span>
                 </div>
                 {property.propertyType === "PG" && property.rules.drinking && (
-                  <div className="flex justify-between py-3 border-b border-gray-200">
-                    <span className="text-gray-600">{t.drinking}</span>
-                    <span className={`font-semibold ${property.rules.drinking === "Allowed" ? "text-green-600" : "text-red-600"}`}>
+                  <div className="flex justify-between py-2 sm:py-3 border-b border-gray-200">
+                    <span className="text-sm sm:text-base text-gray-600">{t.drinking}</span>
+                    <span className={`text-sm sm:text-base font-semibold ${property.rules.drinking === "Allowed" ? "text-green-600" : "text-red-600"}`}>
                       {property.rules.drinking}
                     </span>
                   </div>
                 )}
                 {property.propertyType === "PG" && property.rules.nonVeg && (
-                  <div className="flex justify-between py-3 border-b border-gray-200">
-                    <span className="text-gray-600">{t.nonVeg}</span>
-                    <span className={`font-semibold ${property.rules.nonVeg === "Allowed" ? "text-green-600" : "text-red-600"}`}>
+                  <div className="flex justify-between py-2 sm:py-3 border-b border-gray-200">
+                    <span className="text-sm sm:text-base text-gray-600">{t.nonVeg}</span>
+                    <span className={`text-sm sm:text-base font-semibold ${property.rules.nonVeg === "Allowed" ? "text-green-600" : "text-red-600"}`}>
                       {property.rules.nonVeg}
                     </span>
                   </div>
                 )}
-                <div className="flex justify-between py-3 border-b border-gray-200">
-                  <span className="text-gray-600">{t.pets}</span>
-                  <span className={`font-semibold ${property.rules.pets === "Allowed" ? "text-green-600" : "text-red-600"}`}>
+                <div className="flex justify-between py-2 sm:py-3 border-b border-gray-200">
+                  <span className="text-sm sm:text-base text-gray-600">{t.pets}</span>
+                  <span className={`text-sm sm:text-base font-semibold ${property.rules.pets === "Allowed" ? "text-green-600" : "text-red-600"}`}>
                     {property.rules.pets}
                   </span>
                 </div>
-                <div className="flex justify-between py-3 border-b border-gray-200">
-                  <span className="text-gray-600">{t.visitors}</span>
-                  <span className="font-semibold text-gray-900">{property.rules.visitors}</span>
+                <div className="flex justify-between py-2 sm:py-3 border-b border-gray-200">
+                  <span className="text-sm sm:text-base text-gray-600">{t.visitors}</span>
+                  <span className="text-sm sm:text-base font-semibold text-gray-900">{property.rules.visitors}</span>
                 </div>
-                <div className="flex justify-between py-3 border-b border-gray-200">
-                  <span className="text-gray-600">{t.gateClosing}</span>
-                  <span className="font-semibold text-gray-900">{property.rules.gateClosing}</span>
+                <div className="flex justify-between py-2 sm:py-3 border-b border-gray-200">
+                  <span className="text-sm sm:text-base text-gray-600">{t.gateClosing}</span>
+                  <span className="text-sm sm:text-base font-semibold text-gray-900">{property.rules.gateClosing}</span>
                 </div>
               </div>
             </div>
 
             {/* Services Section */}
-            <div className="bg-white rounded-xl shadow-md p-6 mb-6">
-              <h3 className="text-sm font-semibold text-gray-500 mb-4">{t.services}</h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="flex justify-between py-3 border-b border-gray-200">
-                  <span className="text-gray-600">{t.electricity}</span>
-                  <span className={`font-semibold ${property.services.electricity === "Included" ? "text-green-600" : "text-gray-900"}`}>
+            <div className="bg-white rounded-lg sm:rounded-xl shadow-md p-4 sm:p-5 md:p-6 mb-4 sm:mb-5 md:mb-6">
+              <h3 className="text-xs sm:text-sm font-semibold text-gray-500 mb-3 sm:mb-4">{t.services}</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <div className="flex justify-between py-2 sm:py-3 border-b border-gray-200">
+                  <span className="text-sm sm:text-base text-gray-600">{t.electricity}</span>
+                  <span className={`text-sm sm:text-base font-semibold ${property.services.electricity === "Included" ? "text-green-600" : "text-gray-900"}`}>
                     {property.services.electricity}
                   </span>
                 </div>
-                <div className="flex justify-between py-3 border-b border-gray-200">
-                  <span className="text-gray-600">{t.water}</span>
-                  <span className={`font-semibold ${property.services.water === "Included" ? "text-green-600" : "text-gray-900"}`}>
+                <div className="flex justify-between py-2 sm:py-3 border-b border-gray-200">
+                  <span className="text-sm sm:text-base text-gray-600">{t.water}</span>
+                  <span className={`text-sm sm:text-base font-semibold ${property.services.water === "Included" ? "text-green-600" : "text-gray-900"}`}>
                     {property.services.water}
                   </span>
                 </div>
                 {property.propertyType === "PG" && property.services.meals && (
-                  <div className="flex justify-between py-3 border-b border-gray-200">
-                    <span className="text-gray-600">{t.meals}</span>
-                    <span className="font-semibold text-green-600">{property.services.meals}</span>
+                  <div className="flex justify-between py-2 sm:py-3 border-b border-gray-200">
+                    <span className="text-sm sm:text-base text-gray-600">{t.meals}</span>
+                    <span className="text-sm sm:text-base font-semibold text-green-600">{property.services.meals}</span>
                   </div>
                 )}
                 {property.propertyType === "PG" && property.services.laundry && (
-                  <div className="flex justify-between py-3 border-b border-gray-200">
-                    <span className="text-gray-600">{t.laundry}</span>
-                    <span className={`font-semibold ${property.services.laundry === "Included" ? "text-green-600" : "text-gray-900"}`}>
+                  <div className="flex justify-between py-2 sm:py-3 border-b border-gray-200">
+                    <span className="text-sm sm:text-base text-gray-600">{t.laundry}</span>
+                    <span className={`text-sm sm:text-base font-semibold ${property.services.laundry === "Included" ? "text-green-600" : "text-gray-900"}`}>
                       {property.services.laundry}
                     </span>
                   </div>
                 )}
-                <div className="flex justify-between py-3 border-b border-gray-200">
-                  <span className="text-gray-600">{t.cleaning}</span>
-                  <span className={`font-semibold ${property.services.cleaning === "Included" || property.services.cleaning === "Daily" ? "text-green-600" : "text-gray-900"}`}>
+                <div className="flex justify-between py-2 sm:py-3 border-b border-gray-200">
+                  <span className="text-sm sm:text-base text-gray-600">{t.cleaning}</span>
+                  <span className={`text-sm sm:text-base font-semibold ${property.services.cleaning === "Included" || property.services.cleaning === "Daily" ? "text-green-600" : "text-gray-900"}`}>
                     {property.services.cleaning}
                   </span>
                 </div>
                 {property.propertyType === "Tenant" && property.services.maintenance && (
-                  <div className="flex justify-between py-3 border-b border-gray-200">
-                    <span className="text-gray-600">{t.maintenance}</span>
-                    <span className={`font-semibold ${property.services.maintenance === "Included" ? "text-green-600" : "text-gray-900"}`}>
+                  <div className="flex justify-between py-2 sm:py-3 border-b border-gray-200">
+                    <span className="text-sm sm:text-base text-gray-600">{t.maintenance}</span>
+                    <span className={`text-sm sm:text-base font-semibold ${property.services.maintenance === "Included" ? "text-green-600" : "text-gray-900"}`}>
                       {property.services.maintenance}
                     </span>
                   </div>
@@ -1097,24 +1098,24 @@ export default function PropertyDetailsPage() {
             </div>
 
             {/* Map Section */}
-            <div className="bg-white rounded-xl shadow-md p-6 mb-8">
-              <h3 className="text-sm font-semibold text-gray-500 mb-4">{t.map}</h3>
-              <div className="flex items-center gap-2 mb-4">
-                <MapPin className="w-5 h-5 text-gray-600" />
-                <span className="text-gray-700">{property.fullAddress}</span>
+            <div className="bg-white rounded-lg sm:rounded-xl shadow-md p-4 sm:p-5 md:p-6 mb-6 sm:mb-8">
+              <h3 className="text-xs sm:text-sm font-semibold text-gray-500 mb-3 sm:mb-4">{t.map}</h3>
+              <div className="flex items-center gap-1.5 sm:gap-2 mb-3 sm:mb-4">
+                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 flex-shrink-0" />
+                <span className="text-xs sm:text-sm text-gray-700 line-clamp-2">{property.fullAddress}</span>
               </div>
-              <div className="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center">
-                <p className="text-gray-500">Map placeholder</p>
+              <div className="w-full h-48 sm:h-56 md:h-64 bg-gray-200 rounded-lg flex items-center justify-center">
+                <p className="text-sm sm:text-base text-gray-500">Map placeholder</p>
               </div>
             </div>
 
             {/* Related Listings Section */}
-            <div className="bg-white rounded-xl shadow-md p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-6">
+            <div className="bg-white rounded-lg sm:rounded-xl shadow-md p-4 sm:p-5 md:p-6">
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">
                 {t.relatedListings} {property.location.split(',')[0]}
               </h3>
               
-              <div className="grid md:grid-cols-3 gap-6 mb-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-4 sm:mb-6">
                 {/* Related Property 1 */}
                 <Link href="/property/2" className="group">
                   <div className="relative h-48 rounded-lg overflow-hidden mb-3">
@@ -1201,42 +1202,42 @@ export default function PropertyDetailsPage() {
 
           {/* Sidebar */}
           <div className="lg:col-span-1">
-            <div className="sticky top-24">
+            <div className="lg:sticky lg:top-24">
               {/* Price Card */}
-              <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
-                <p className="text-sm text-gray-600 mb-2">{t.monthlyRent}</p>
-                <p className="text-4xl font-bold text-gray-900 mb-1">
+              <div className="bg-white rounded-lg sm:rounded-xl shadow-lg p-4 sm:p-5 md:p-6 mb-4 sm:mb-6">
+                <p className="text-xs sm:text-sm text-gray-600 mb-1 sm:mb-2">{t.monthlyRent}</p>
+                <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-1">
                   {currencySymbol} {property.price}
                 </p>
-                <p className="text-sm text-gray-600 mb-4">
+                <p className="text-xs sm:text-sm text-gray-600 mb-3 sm:mb-4">
                   {t.securityDeposit}: {currencySymbol} {property.deposit}
                 </p>
 
                 {/* Price Status */}
-                <div className="mb-6">
-                  <p className="text-sm font-semibold text-gray-700 mb-2">
+                <div className="mb-4 sm:mb-6">
+                  <p className="text-xs sm:text-sm font-semibold text-gray-700 mb-2">
                     {t.budgetFriendly} <span className="text-green-600">{t.belowAverage}</span>
                   </p>
-                  <div className="w-full h-2 bg-gradient-to-r from-green-500 via-yellow-500 to-red-500 rounded-full mb-2"></div>
+                  <div className="w-full h-1.5 sm:h-2 bg-gradient-to-r from-green-500 via-yellow-500 to-red-500 rounded-full mb-2"></div>
                   <p className="text-xs text-gray-600">{t.priceDescription}</p>
                 </div>
 
                 {/* Rental Info */}
-                <div className="space-y-3 mb-6">
+                <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
                   <div className="flex justify-between">
-                    <span className="text-gray-600">{t.rentalPeriod}</span>
-                    <span className="font-semibold text-green-600">{property.rentalPeriod}</span>
+                    <span className="text-xs sm:text-sm text-gray-600">{t.rentalPeriod}</span>
+                    <span className="text-xs sm:text-sm font-semibold text-green-600">{property.rentalPeriod}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">{t.availableFrom}</span>
-                    <span className="font-semibold text-green-600">{property.availableFrom}</span>
+                    <span className="text-xs sm:text-sm text-gray-600">{t.availableFrom}</span>
+                    <span className="text-xs sm:text-sm font-semibold text-green-600">{property.availableFrom}</span>
                   </div>
                 </div>
 
                 {/* Contact Button */}
                 <button 
                   onClick={() => setShowContactForm(true)}
-                  className="w-full py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors mb-4"
+                  className="w-full py-2.5 sm:py-3 bg-green-600 hover:bg-green-700 text-white text-sm sm:text-base font-semibold rounded-lg transition-colors mb-3 sm:mb-4"
                 >
                   {t.contactOwner}
                 </button>
@@ -1244,9 +1245,9 @@ export default function PropertyDetailsPage() {
                 {/* Share Button */}
                 <button 
                   onClick={() => setShowShareModal(true)}
-                  className="w-full py-3 border-2 border-gray-300 hover:border-primary text-gray-700 font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
+                  className="w-full py-2.5 sm:py-3 border-2 border-gray-300 hover:border-primary text-gray-700 text-sm sm:text-base font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
                 >
-                  <Share2 className="w-5 h-5" />
+                  <Share2 className="w-4 h-4 sm:w-5 sm:h-5" />
                   {t.share}
                 </button>
 
@@ -1390,12 +1391,15 @@ export default function PropertyDetailsPage() {
         href={`https://wa.me/${property.landlord.phone.replace(/\s/g, '')}?text=${encodeURIComponent(`Hi, I'm interested in ${property.title} at ${property.location}`)}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 w-12 h-12 bg-green-700 text-white rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 group"
+        className="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 md:bottom-6 md:right-6 z-50 w-12 h-12 sm:w-14 sm:h-14 md:w-12 md:h-12 bg-green-700 text-white rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 group animate-bounce"
+        style={{
+          animation: 'bounce 2s infinite'
+        }}
       >
-        <MessageCircle className="w-6 h-6" />
+        <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6 md:w-6 md:h-6" />
         
         {/* Tooltip */}
-        <span className="absolute right-full mr-3 px-4 py-1.5 bg-gray-900 text-white text-xs font-medium rounded-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-lg">
+        <span className="absolute right-full mr-2 sm:mr-3 px-3 sm:px-4 py-1 sm:py-1.5 bg-gray-900 text-white text-xs font-medium rounded-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-lg hidden sm:block">
           Chat on WhatsApp with owner
           {/* Arrow */}
           <span className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 bg-gray-900 transform rotate-45"></span>
