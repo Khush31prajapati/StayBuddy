@@ -102,6 +102,12 @@ export default function PostPropertyPage() {
     mapView: []
   });
   
+  // PG Room Images with status
+  const [roomImages, setRoomImages] = useState<Array<{ id: string; name: string; status: 'vacant' | 'occupied'; file: File | null }>>([]);
+  const [kitchenImages, setKitchenImages] = useState<File[]>([]);
+  const [washroomImages, setWashroomImages] = useState<File[]>([]);
+  const [commonAreaImages, setCommonAreaImages] = useState<File[]>([]);
+  
   const [error, setError] = useState("");
 
   const roomFacilities = [
@@ -348,6 +354,20 @@ export default function PostPropertyPage() {
       uploadPicturesTitle: "Upload Pictures",
       uploadSubtitle: "Property with Photos Get More Attention from Buyers",
       uploadInfo: "Accepted formats are .jpg, .jpeg, .gif, .bmp & .png | Minimum dimension allowed 600*400 Pixel | Maximum size allowed is 6 MB",
+      roomsImages: "Rooms Images",
+      roomsImagesSubtitle: "Upload images for each room and mark their availability status",
+      addRoom: "Add Room",
+      roomName: "Room Name",
+      roomStatus: "Room Status",
+      vacant: "Vacant",
+      occupied: "Occupied",
+      uploadRoomImage: "Upload Room Image",
+      removeRoom: "Remove Room",
+      kitchenImages: "Kitchen Images",
+      washroomImages: "Washroom Images",
+      commonAreaImages: "Common Area Images",
+      uploadImages: "Upload Images",
+      imagesUploaded: "images uploaded",
       singleRoom: "Single Room",
       buildingView: "Building View",
       commonArea: "Common Area",
@@ -565,6 +585,20 @@ export default function PostPropertyPage() {
       uploadPicturesTitle: "Télécharger des photos",
       uploadSubtitle: "Les propriétés avec photos attirent plus l'attention",
       uploadInfo: "Formats acceptés: .jpg, .jpeg, .gif, .bmp et .png",
+      roomsImages: "Images des chambres",
+      roomsImagesSubtitle: "Téléchargez des images pour chaque chambre et marquez leur statut de disponibilité",
+      addRoom: "Ajouter une chambre",
+      roomName: "Nom de la chambre",
+      roomStatus: "Statut de la chambre",
+      vacant: "Vacant",
+      occupied: "Occupé",
+      uploadRoomImage: "Télécharger l'image de la chambre",
+      removeRoom: "Supprimer la chambre",
+      kitchenImages: "Images de la cuisine",
+      washroomImages: "Images de la salle de bain",
+      commonAreaImages: "Images de l'espace commun",
+      uploadImages: "Télécharger des images",
+      imagesUploaded: "images téléchargées",
       singleRoom: "Chambre simple",
       buildingView: "Vue du bâtiment",
       commonArea: "Espace commun",
@@ -782,6 +816,51 @@ export default function PostPropertyPage() {
       ...prev,
       [category]: prev[category].filter((_, i) => i !== index)
     }));
+  };
+
+  // PG Room Image Handlers
+  const addRoomImage = () => {
+    const newRoom = {
+      id: `room-${Date.now()}`,
+      name: `Room ${roomImages.length + 1}`,
+      status: 'vacant' as const,
+      file: null
+    };
+    setRoomImages(prev => [...prev, newRoom]);
+  };
+
+  const removeRoomImage = (id: string) => {
+    setRoomImages(prev => prev.filter(room => room.id !== id));
+  };
+
+  const updateRoomImage = (id: string, field: 'name' | 'status', value: string) => {
+    setRoomImages(prev => prev.map(room => 
+      room.id === id ? { ...room, [field]: value } : room
+    ));
+  };
+
+  const handleRoomImageUpload = (id: string, file: File | null) => {
+    setRoomImages(prev => prev.map(room => 
+      room.id === id ? { ...room, file } : room
+    ));
+  };
+
+  const handleKitchenImageUpload = (files: FileList | null) => {
+    if (files) {
+      setKitchenImages(prev => [...prev, ...Array.from(files)]);
+    }
+  };
+
+  const handleWashroomImageUpload = (files: FileList | null) => {
+    if (files) {
+      setWashroomImages(prev => [...prev, ...Array.from(files)]);
+    }
+  };
+
+  const handleCommonAreaImageUpload = (files: FileList | null) => {
+    if (files) {
+      setCommonAreaImages(prev => [...prev, ...Array.from(files)]);
+    }
   };
 
   // Auto redirect after success
@@ -1956,82 +2035,333 @@ export default function PostPropertyPage() {
                   <h3 className="text-lg font-bold text-gray-800">{t.uploadPicturesTitle}</h3>
                   <p className="text-sm text-gray-600">{t.uploadSubtitle}</p>
                   <p className="text-xs text-gray-500">{t.uploadInfo}</p>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {[
-                      { id: 'singleRoom', label: t.singleRoom },
-                      { id: 'buildingView', label: t.buildingView },
-                      { id: 'commonArea', label: t.commonArea },
-                      { id: 'commonAmenities', label: t.commonAmenities },
-                      { id: 'kitchen', label: t.kitchen },
-                      { id: 'neighbourhoodView', label: t.neighbourhoodView },
-                      { id: 'mapView', label: t.mapView }
-                    ].map((category) => (
-                      <div key={category.id} className="relative group">
-                        <input
-                          type="file"
-                          id={category.id}
-                          accept="image/*"
-                          multiple
-                          onChange={(e) => handleImageUpload(category.id, e.target.files)}
-                          className="hidden"
-                        />
-                        
-                        {uploadedImages[category.id].length > 0 ? (
-                          // Show uploaded images
-                          <div className="relative h-40 rounded-xl overflow-hidden border-2 border-primary">
-                            <img
-                              src={URL.createObjectURL(uploadedImages[category.id][0])}
-                              alt={category.label}
-                              className="w-full h-full object-cover"
-                            />
-                            {/* Overlay with image count and actions */}
-                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2">
-                              <span className="text-white font-semibold text-sm">
-                                {uploadedImages[category.id].length} {uploadedImages[category.id].length === 1 ? 'Image' : 'Images'}
-                              </span>
-                              <div className="flex gap-2">
-                                <label
-                                  htmlFor={category.id}
-                                  className="px-3 py-1.5 bg-white hover:bg-gray-100 text-gray-700 rounded-lg text-xs font-medium cursor-pointer transition-colors"
-                                >
-                                  Add More
-                                </label>
-                                <button
-                                  onClick={() => setUploadedImages(prev => ({ ...prev, [category.id]: [] }))}
-                                  className="px-3 py-1.5 bg-red-500 hover:bg-red-600 text-white rounded-lg text-xs font-medium transition-colors"
-                                >
-                                  Remove All
-                                </button>
-                              </div>
-                            </div>
-                            {/* Image counter badge */}
-                            {uploadedImages[category.id].length > 1 && (
-                              <div className="absolute top-2 right-2 bg-primary text-white px-2 py-1 rounded-full text-xs font-semibold">
-                                +{uploadedImages[category.id].length - 1}
-                              </div>
-                            )}
-                            {/* Category label */}
-                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-2">
-                              <span className="text-white text-xs font-medium">{category.label}</span>
-                            </div>
+                  
+                  {propertyType === "PG" ? (
+                    // PG Property Image Upload
+                    <div className="space-y-6">
+                      {/* Rooms Images */}
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <h4 className="text-md font-semibold text-gray-800">{t.roomsImages}</h4>
+                            <p className="text-xs text-gray-500">{t.roomsImagesSubtitle}</p>
                           </div>
-                        ) : (
-                          // Show upload box
+                          <button
+                            type="button"
+                            onClick={addRoomImage}
+                            className="px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg text-sm font-medium transition-colors"
+                          >
+                            + {t.addRoom}
+                          </button>
+                        </div>
+                        
+                        <div className="space-y-3">
+                          {roomImages.map((room) => (
+                            <div key={room.id} className="bg-gray-50 rounded-xl p-4 space-y-3">
+                              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                {/* Room Name */}
+                                <div>
+                                  <label className="block text-xs font-medium text-gray-700 mb-1">
+                                    {t.roomName}
+                                  </label>
+                                  <input
+                                    type="text"
+                                    value={room.name}
+                                    onChange={(e) => updateRoomImage(room.id, 'name', e.target.value)}
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                                    placeholder="e.g., Room 1"
+                                  />
+                                </div>
+                                
+                                {/* Room Status */}
+                                <div>
+                                  <label className="block text-xs font-medium text-gray-700 mb-1">
+                                    {t.roomStatus}
+                                  </label>
+                                  <select
+                                    value={room.status}
+                                    onChange={(e) => updateRoomImage(room.id, 'status', e.target.value)}
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                                  >
+                                    <option value="vacant">{t.vacant}</option>
+                                    <option value="occupied">{t.occupied}</option>
+                                  </select>
+                                </div>
+                                
+                                {/* Upload Image */}
+                                <div>
+                                  <label className="block text-xs font-medium text-gray-700 mb-1">
+                                    {t.uploadRoomImage}
+                                  </label>
+                                  <div className="flex gap-2">
+                                    <input
+                                      type="file"
+                                      id={`room-${room.id}`}
+                                      accept="image/*"
+                                      onChange={(e) => handleRoomImageUpload(room.id, e.target.files?.[0] || null)}
+                                      className="hidden"
+                                    />
+                                    <label
+                                      htmlFor={`room-${room.id}`}
+                                      className={`flex-1 px-3 py-2 text-center text-sm font-medium rounded-lg cursor-pointer transition-colors ${
+                                        room.file 
+                                          ? 'bg-green-100 text-green-700 border border-green-300' 
+                                          : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                                      }`}
+                                    >
+                                      {room.file ? '✓ Uploaded' : 'Choose File'}
+                                    </label>
+                                    <button
+                                      type="button"
+                                      onClick={() => removeRoomImage(room.id)}
+                                      className="px-3 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm font-medium transition-colors"
+                                    >
+                                      <X className="w-4 h-4" />
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              {/* Preview Image */}
+                              {room.file && (
+                                <div className="relative h-32 rounded-lg overflow-hidden">
+                                  <img
+                                    src={URL.createObjectURL(room.file)}
+                                    alt={room.name}
+                                    className="w-full h-full object-cover"
+                                  />
+                                  <div className={`absolute top-2 right-2 px-3 py-1 rounded-full text-xs font-semibold ${
+                                    room.status === 'vacant' ? 'bg-green-600 text-white' : 'bg-red-600 text-white'
+                                  }`}>
+                                    {room.status === 'vacant' ? t.vacant : t.occupied}
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          ))}
+                          
+                          {roomImages.length === 0 && (
+                            <div className="text-center py-8 text-gray-500 text-sm">
+                              No rooms added yet. Click "Add Room" to start.
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      
+                      {/* Kitchen Images */}
+                      <div className="space-y-3">
+                        <h4 className="text-md font-semibold text-gray-800">{t.kitchenImages}</h4>
+                        <div className="relative">
+                          <input
+                            type="file"
+                            id="kitchen-images"
+                            accept="image/*"
+                            multiple
+                            onChange={(e) => handleKitchenImageUpload(e.target.files)}
+                            className="hidden"
+                          />
                           <label
-                            htmlFor={category.id}
-                            className="flex flex-col items-center justify-center h-40 bg-gray-100 rounded-xl border-2 border-dashed border-gray-300 hover:border-primary hover:bg-primary/5 cursor-pointer transition-all"
+                            htmlFor="kitchen-images"
+                            className="flex flex-col items-center justify-center h-32 bg-gray-100 rounded-xl border-2 border-dashed border-gray-300 hover:border-primary hover:bg-primary/5 cursor-pointer transition-all"
                           >
                             <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-2">
                               <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                               </svg>
                             </div>
-                            <span className="text-xs font-medium text-gray-700 text-center px-2">{category.label}</span>
+                            <span className="text-sm font-medium text-gray-700">{t.uploadImages}</span>
+                            {kitchenImages.length > 0 && (
+                              <span className="text-xs text-green-600 mt-1">{kitchenImages.length} {t.imagesUploaded}</span>
+                            )}
                           </label>
+                        </div>
+                        {kitchenImages.length > 0 && (
+                          <div className="grid grid-cols-3 gap-2">
+                            {kitchenImages.map((file, index) => (
+                              <div key={index} className="relative h-24 rounded-lg overflow-hidden group">
+                                <img src={URL.createObjectURL(file)} alt={`Kitchen ${index + 1}`} className="w-full h-full object-cover" />
+                                <button
+                                  type="button"
+                                  onClick={() => setKitchenImages(prev => prev.filter((_, i) => i !== index))}
+                                  className="absolute top-1 right-1 w-6 h-6 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                                >
+                                  <X className="w-4 h-4" />
+                                </button>
+                              </div>
+                            ))}
+                          </div>
                         )}
                       </div>
-                    ))}
-                  </div>
+                      
+                      {/* Washroom Images */}
+                      <div className="space-y-3">
+                        <h4 className="text-md font-semibold text-gray-800">{t.washroomImages}</h4>
+                        <div className="relative">
+                          <input
+                            type="file"
+                            id="washroom-images"
+                            accept="image/*"
+                            multiple
+                            onChange={(e) => handleWashroomImageUpload(e.target.files)}
+                            className="hidden"
+                          />
+                          <label
+                            htmlFor="washroom-images"
+                            className="flex flex-col items-center justify-center h-32 bg-gray-100 rounded-xl border-2 border-dashed border-gray-300 hover:border-primary hover:bg-primary/5 cursor-pointer transition-all"
+                          >
+                            <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-2">
+                              <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                              </svg>
+                            </div>
+                            <span className="text-sm font-medium text-gray-700">{t.uploadImages}</span>
+                            {washroomImages.length > 0 && (
+                              <span className="text-xs text-green-600 mt-1">{washroomImages.length} {t.imagesUploaded}</span>
+                            )}
+                          </label>
+                        </div>
+                        {washroomImages.length > 0 && (
+                          <div className="grid grid-cols-3 gap-2">
+                            {washroomImages.map((file, index) => (
+                              <div key={index} className="relative h-24 rounded-lg overflow-hidden group">
+                                <img src={URL.createObjectURL(file)} alt={`Washroom ${index + 1}`} className="w-full h-full object-cover" />
+                                <button
+                                  type="button"
+                                  onClick={() => setWashroomImages(prev => prev.filter((_, i) => i !== index))}
+                                  className="absolute top-1 right-1 w-6 h-6 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                                >
+                                  <X className="w-4 h-4" />
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                      
+                      {/* Common Area Images */}
+                      <div className="space-y-3">
+                        <h4 className="text-md font-semibold text-gray-800">{t.commonAreaImages}</h4>
+                        <div className="relative">
+                          <input
+                            type="file"
+                            id="common-area-images"
+                            accept="image/*"
+                            multiple
+                            onChange={(e) => handleCommonAreaImageUpload(e.target.files)}
+                            className="hidden"
+                          />
+                          <label
+                            htmlFor="common-area-images"
+                            className="flex flex-col items-center justify-center h-32 bg-gray-100 rounded-xl border-2 border-dashed border-gray-300 hover:border-primary hover:bg-primary/5 cursor-pointer transition-all"
+                          >
+                            <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-2">
+                              <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                              </svg>
+                            </div>
+                            <span className="text-sm font-medium text-gray-700">{t.uploadImages}</span>
+                            {commonAreaImages.length > 0 && (
+                              <span className="text-xs text-green-600 mt-1">{commonAreaImages.length} {t.imagesUploaded}</span>
+                            )}
+                          </label>
+                        </div>
+                        {commonAreaImages.length > 0 && (
+                          <div className="grid grid-cols-3 gap-2">
+                            {commonAreaImages.map((file, index) => (
+                              <div key={index} className="relative h-24 rounded-lg overflow-hidden group">
+                                <img src={URL.createObjectURL(file)} alt={`Common Area ${index + 1}`} className="w-full h-full object-cover" />
+                                <button
+                                  type="button"
+                                  onClick={() => setCommonAreaImages(prev => prev.filter((_, i) => i !== index))}
+                                  className="absolute top-1 right-1 w-6 h-6 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                                >
+                                  <X className="w-4 h-4" />
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ) : (
+                    // Tenant Property Image Upload (Original)
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                      {[
+                        { id: 'singleRoom', label: t.singleRoom },
+                        { id: 'buildingView', label: t.buildingView },
+                        { id: 'commonArea', label: t.commonArea },
+                        { id: 'commonAmenities', label: t.commonAmenities },
+                        { id: 'kitchen', label: t.kitchen },
+                        { id: 'neighbourhoodView', label: t.neighbourhoodView },
+                        { id: 'mapView', label: t.mapView }
+                      ].map((category) => (
+                        <div key={category.id} className="relative group">
+                          <input
+                            type="file"
+                            id={category.id}
+                            accept="image/*"
+                            multiple
+                            onChange={(e) => handleImageUpload(category.id, e.target.files)}
+                            className="hidden"
+                          />
+                          
+                          {uploadedImages[category.id].length > 0 ? (
+                            // Show uploaded images
+                            <div className="relative h-40 rounded-xl overflow-hidden border-2 border-primary">
+                              <img
+                                src={URL.createObjectURL(uploadedImages[category.id][0])}
+                                alt={category.label}
+                                className="w-full h-full object-cover"
+                              />
+                              {/* Overlay with image count and actions */}
+                              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2">
+                                <span className="text-white font-semibold text-sm">
+                                  {uploadedImages[category.id].length} {uploadedImages[category.id].length === 1 ? 'Image' : 'Images'}
+                                </span>
+                                <div className="flex gap-2">
+                                  <label
+                                    htmlFor={category.id}
+                                    className="px-3 py-1.5 bg-white hover:bg-gray-100 text-gray-700 rounded-lg text-xs font-medium cursor-pointer transition-colors"
+                                  >
+                                    Add More
+                                  </label>
+                                  <button
+                                    onClick={() => setUploadedImages(prev => ({ ...prev, [category.id]: [] }))}
+                                    className="px-3 py-1.5 bg-red-500 hover:bg-red-600 text-white rounded-lg text-xs font-medium transition-colors"
+                                  >
+                                    Remove All
+                                  </button>
+                                </div>
+                              </div>
+                              {/* Image counter badge */}
+                              {uploadedImages[category.id].length > 1 && (
+                                <div className="absolute top-2 right-2 bg-primary text-white px-2 py-1 rounded-full text-xs font-semibold">
+                                  +{uploadedImages[category.id].length - 1}
+                                </div>
+                              )}
+                              {/* Category label */}
+                              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-2">
+                                <span className="text-white text-xs font-medium">{category.label}</span>
+                              </div>
+                            </div>
+                          ) : (
+                            // Show upload box
+                            <label
+                              htmlFor={category.id}
+                              className="flex flex-col items-center justify-center h-40 bg-gray-100 rounded-xl border-2 border-dashed border-gray-300 hover:border-primary hover:bg-primary/5 cursor-pointer transition-all"
+                            >
+                              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-2">
+                                <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                                </svg>
+                              </div>
+                              <span className="text-xs font-medium text-gray-700 text-center px-2">{category.label}</span>
+                            </label>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {error && <p className="text-red-500 text-sm">{error}</p>}

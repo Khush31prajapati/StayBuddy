@@ -15,7 +15,7 @@ const propertyData: { [key: string]: any } = {
     id: "1",
     title: "Beautiful Apartment with Balcony",
     location: "10 Rue Georges Pompidou, Talence, France",
-    fullAddress: "Alterric France, Rue du Dépôt, 60280 Margny-lès-Compiègne, France",
+    fullAddress: "10 Rue Georges Pompidou, Talence, France",
     price: 1100,
     deposit: 2200,
     rooms: 3,
@@ -54,7 +54,7 @@ const propertyData: { [key: string]: any } = {
   },
   "2": {
     id: "2",
-    title: "Comfortable PG Accommodation",
+    title: "Spacious Studio Apartment",
     location: "Alterric France, Rue du Dépôt, 60280 Venette",
     fullAddress: "Alterric France, Rue du Dépôt, 60280 Venette, France",
     price: 695,
@@ -72,6 +72,66 @@ const propertyData: { [key: string]: any } = {
       "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
+    ],
+    roomsAvailability: [
+      { 
+        id: "room1", 
+        name: "Room 1", 
+        status: "sold",
+        image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop"
+      },
+      { 
+        id: "room2", 
+        name: "Room 2", 
+        status: "sold",
+        image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop"
+      },
+      { 
+        id: "room3", 
+        name: "Room 3", 
+        status: "available",
+        image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop"
+      },
+      { 
+        id: "room4", 
+        name: "Room 4", 
+        status: "available",
+        image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop"
+      },
+      { 
+        id: "room5", 
+        name: "Room 5", 
+        status: "sold",
+        image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop"
+      }
+    ],
+    kitchenImages: [
+      {
+        id: "kitchen1",
+        name: "Kitchen",
+        image: "https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=2068&auto=format&fit=crop"
+      }
+    ],
+    washroomImages: [
+      {
+        id: "washroom1",
+        name: "Washroom 1",
+        image: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?q=80&w=2187&auto=format&fit=crop"
+      },
+      {
+        id: "washroom2",
+        name: "Washroom 2",
+        image: "https://images.unsplash.com/photo-1604709177225-055f99402ea3?q=80&w=2070&auto=format&fit=crop"
+      }
+    ],
+    commonAreaImages: [
+      {
+        id: "common1",
+        name: "Common Area",
+        image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=2070&auto=format&fit=crop"
+      }
     ],
     description: "Comfortable PG accommodation perfect for students. Includes meals, WiFi, and all basic amenities. Safe and secure environment.",
     amenities: ["WiFi", "Meals", "Laundry", "AC", "Attached Bathroom", "Study Table"],
@@ -96,6 +156,322 @@ const propertyData: { [key: string]: any } = {
     },
     priceStatus: "below average",
     isNew: true
+  },
+  "3": {
+    id: "3",
+    title: "Modern Apartment with Garden View",
+    location: "Aix-en-Provence, Bouches-du-Rhône",
+    fullAddress: "Aix-en-Provence, Bouches-du-Rhône, France",
+    price: 1500,
+    deposit: 3000,
+    rooms: 3,
+    bathrooms: 2,
+    area: 70,
+    propertyType: "Tenant",
+    category: "Flat",
+    rentalPeriod: "Unlimited",
+    availableFrom: "ASAP",
+    images: [
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
+    ],
+    description: "Modern 3-bedroom apartment with beautiful garden view. Spacious living areas and contemporary design.",
+    amenities: ["WiFi", "Parking", "Garden View", "Security", "Elevator", "Balcony"],
+    rules: {
+      smoking: "Not Allowed",
+      pets: "Allowed",
+      visitors: "Allowed",
+      gateClosing: "No restriction"
+    },
+    services: {
+      electricity: "Included",
+      water: "Included",
+      maintenance: "Included",
+      cleaning: "Not Included"
+    },
+    landlord: {
+      name: "Property Manager",
+      phone: "+33 1 23 45 67 89",
+      email: "contact@renthub.com"
+    },
+    priceStatus: "below average",
+    isNew: true
+  },
+  "4": {
+    id: "4",
+    title: "Cozy One Room Apartment",
+    location: "Bitic-Etables-sur-Mer, Côtes-d'Armor",
+    fullAddress: "Bitic-Etables-sur-Mer, Côtes-d'Armor, France",
+    price: 560,
+    deposit: 1120,
+    rooms: 1,
+    bathrooms: 1,
+    area: 32,
+    propertyType: "Tenant",
+    category: "Studio",
+    rentalPeriod: "Unlimited",
+    availableFrom: "ASAP",
+    images: [
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
+    ],
+    description: "Cozy studio apartment perfect for singles or couples. Compact yet comfortable living space.",
+    amenities: ["WiFi", "Furnished", "Kitchen", "Security"],
+    rules: {
+      smoking: "Not Allowed",
+      pets: "Not Allowed",
+      visitors: "Allowed",
+      gateClosing: "No restriction"
+    },
+    services: {
+      electricity: "Included",
+      water: "Included",
+      maintenance: "Included",
+      cleaning: "Not Included"
+    },
+    landlord: {
+      name: "Property Owner",
+      phone: "+33 1 23 45 67 89",
+      email: "contact@renthub.com"
+    },
+    priceStatus: "below average",
+    isNew: true
+  },
+  "5": {
+    id: "5",
+    title: "Luxury Penthouse",
+    location: "Paris 16th, Île-de-France",
+    fullAddress: "Paris 16th, Île-de-France, France",
+    price: 2800,
+    deposit: 5600,
+    rooms: 4,
+    bathrooms: 3,
+    area: 120,
+    propertyType: "Tenant",
+    category: "Penthouse",
+    rentalPeriod: "Unlimited",
+    availableFrom: "ASAP",
+    images: [
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
+    ],
+    description: "Luxury penthouse with panoramic city views. Premium finishes and top-tier amenities.",
+    amenities: ["WiFi", "Parking", "Gym", "Pool", "Security", "Terrace", "Elevator"],
+    rules: {
+      smoking: "Not Allowed",
+      pets: "Allowed",
+      visitors: "Allowed",
+      gateClosing: "No restriction"
+    },
+    services: {
+      electricity: "Included",
+      water: "Included",
+      maintenance: "Included",
+      cleaning: "Included"
+    },
+    landlord: {
+      name: "Luxury Properties",
+      phone: "+33 1 23 45 67 89",
+      email: "contact@renthub.com"
+    },
+    priceStatus: "below average",
+    badge: "Premium"
+  },
+  "6": {
+    id: "6",
+    title: "Student-Friendly PG",
+    location: "Lyon 7th, Rhône-Alpes",
+    fullAddress: "Lyon 7th, Rhône-Alpes, France",
+    price: 850,
+    deposit: 1700,
+    rooms: 2,
+    bathrooms: 1,
+    area: 45,
+    propertyType: "PG",
+    category: "Double",
+    pgFor: "Both",
+    preferredTenants: "Student",
+    rentalPeriod: "Unlimited",
+    availableFrom: "ASAP",
+    images: [
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
+    ],
+    roomsAvailability: [
+      { 
+        id: "room1", 
+        name: "Room 1", 
+        status: "available",
+        image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop"
+      },
+      { 
+        id: "room2", 
+        name: "Room 2", 
+        status: "available",
+        image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop"
+      },
+      { 
+        id: "room3", 
+        name: "Room 3", 
+        status: "sold",
+        image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop"
+      }
+    ],
+    description: "Student-friendly PG accommodation near universities. Perfect for students with study-friendly environment.",
+    amenities: ["WiFi", "Meals", "Laundry", "Study Room", "Common Area", "Security"],
+    rules: {
+      smoking: "Not Allowed",
+      drinking: "Not Allowed",
+      nonVeg: "Allowed",
+      visitors: "Allowed (9 AM - 9 PM)",
+      gateClosing: "11:00 PM"
+    },
+    services: {
+      electricity: "Included",
+      water: "Included",
+      meals: "2 meals/day",
+      laundry: "Included",
+      cleaning: "Daily"
+    },
+    landlord: {
+      name: "PG Manager",
+      phone: "+33 1 23 45 67 89",
+      email: "contact@renthub.com"
+    },
+    priceStatus: "below average"
+  },
+  "8": {
+    id: "8",
+    title: "Renovated Studio",
+    location: "Toulouse Centre, Haute-Garonne",
+    fullAddress: "Toulouse Centre, Haute-Garonne, France",
+    price: 650,
+    deposit: 1300,
+    rooms: 1,
+    bathrooms: 1,
+    area: 28,
+    propertyType: "PG",
+    category: "Single",
+    pgFor: "Both",
+    preferredTenants: "Professional",
+    rentalPeriod: "Unlimited",
+    availableFrom: "ASAP",
+    images: [
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
+    ],
+    roomsAvailability: [
+      { 
+        id: "room1", 
+        name: "Room 1", 
+        status: "sold",
+        image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop"
+      },
+      { 
+        id: "room2", 
+        name: "Room 2", 
+        status: "available",
+        image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop"
+      }
+    ],
+    description: "Renovated PG studio in the heart of Toulouse. Modern amenities and great connectivity.",
+    amenities: ["WiFi", "Meals", "AC", "Attached Bathroom", "Furnished", "Security"],
+    rules: {
+      smoking: "Not Allowed",
+      drinking: "Not Allowed",
+      nonVeg: "Allowed",
+      visitors: "Allowed (10 AM - 8 PM)",
+      gateClosing: "10:30 PM"
+    },
+    services: {
+      electricity: "Included",
+      water: "Included",
+      meals: "2 meals/day",
+      laundry: "Included",
+      cleaning: "Daily"
+    },
+    landlord: {
+      name: "PG Owner",
+      phone: "+33 1 23 45 67 89",
+      email: "contact@renthub.com"
+    },
+    priceStatus: "below average"
+  },
+  "13": {
+    id: "13",
+    title: "Cozy PG Near University",
+    location: "Montpellier Centre, Hérault",
+    fullAddress: "Montpellier Centre, Hérault, France",
+    price: 580,
+    deposit: 1160,
+    rooms: 1,
+    bathrooms: 1,
+    area: 25,
+    propertyType: "PG",
+    category: "Single",
+    pgFor: "Both",
+    preferredTenants: "Student",
+    rentalPeriod: "Unlimited",
+    availableFrom: "ASAP",
+    images: [
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
+    ],
+    roomsAvailability: [
+      { 
+        id: "room1", 
+        name: "Room 1", 
+        status: "available",
+        image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop"
+      },
+      { 
+        id: "room2", 
+        name: "Room 2", 
+        status: "available",
+        image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop"
+      },
+      { 
+        id: "room3", 
+        name: "Room 3", 
+        status: "available",
+        image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop"
+      },
+      { 
+        id: "room4", 
+        name: "Room 4", 
+        status: "sold",
+        image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop"
+      }
+    ],
+    description: "Cozy PG accommodation near university campus. Perfect for students with affordable pricing and good facilities.",
+    amenities: ["WiFi", "Meals", "Laundry", "Study Table", "Common Area", "Security"],
+    rules: {
+      smoking: "Not Allowed",
+      drinking: "Not Allowed",
+      nonVeg: "Allowed",
+      visitors: "Allowed (9 AM - 8 PM)",
+      gateClosing: "10:00 PM"
+    },
+    services: {
+      electricity: "Included",
+      water: "Included",
+      meals: "3 meals/day",
+      laundry: "Included",
+      cleaning: "Daily"
+    },
+    landlord: {
+      name: "PG Manager",
+      phone: "+33 1 23 45 67 89",
+      email: "contact@renthub.com"
+    },
+    priceStatus: "below average",
+    isNew: true
   }
 };
 
@@ -109,6 +485,7 @@ export default function PropertyDetailsPage() {
   const [showShareModal, setShowShareModal] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
+  const [selectedSpaceType, setSelectedSpaceType] = useState<string>("rooms");
 
   // Currency symbol based on language from translations
   const currencySymbol = translate('currency.symbol');
@@ -160,6 +537,14 @@ export default function PropertyDetailsPage() {
       maintenance: "Maintenance",
       description: "DESCRIPTION",
       map: "LOCATION",
+      roomAvailability: "ROOM AVAILABILITY",
+      availableRooms: "Vacant Rooms",
+      soldRooms: "Occupied Rooms",
+      available: "Vacant",
+      sold: "OCCUPIED",
+      kitchen: "Kitchen",
+      washroom: "Washroom",
+      commonArea: "Common Area",
       relatedListings: "Related Properties",
       viewMore: "View more properties",
       share: "Share",
@@ -214,6 +599,14 @@ export default function PropertyDetailsPage() {
       maintenance: "Entretien",
       description: "DESCRIPTION",
       map: "EMPLACEMENT",
+      roomAvailability: "DISPONIBILITÉ DES CHAMBRES",
+      availableRooms: "Chambres vacantes",
+      soldRooms: "Chambres occupées",
+      available: "Vacant",
+      sold: "OCCUPÉ",
+      kitchen: "Cuisine",
+      washroom: "Salle de bain",
+      commonArea: "Espace commun",
       relatedListings: "Propriétés similaires",
       viewMore: "Voir plus de propriétés",
       share: "Partager",
@@ -230,14 +623,42 @@ export default function PropertyDetailsPage() {
 
   const t = content[language];
 
+  // Get current images based on selected space type
+  const getCurrentImages = () => {
+    if (property.propertyType !== "PG") {
+      return property.images;
+    }
+
+    switch (selectedSpaceType) {
+      case "rooms":
+        return property.roomsAvailability || [];
+      case "kitchen":
+        return property.kitchenImages || [];
+      case "washroom":
+        return property.washroomImages || [];
+      case "commonArea":
+        return property.commonAreaImages || [];
+      default:
+        return property.roomsAvailability || [];
+    }
+  };
+
+  const currentImages = getCurrentImages();
+
   const nextImage = () => {
     setDirection(1);
-    setCurrentImageIndex((prev) => (prev + 1) % property.images.length);
+    setCurrentImageIndex((prev) => (prev + 1) % currentImages.length);
   };
 
   const prevImage = () => {
     setDirection(-1);
-    setCurrentImageIndex((prev) => (prev - 1 + property.images.length) % property.images.length);
+    setCurrentImageIndex((prev) => (prev - 1 + currentImages.length) % currentImages.length);
+  };
+
+  // Reset image index when space type changes
+  const handleSpaceTypeChange = (spaceType: string) => {
+    setSelectedSpaceType(spaceType);
+    setCurrentImageIndex(0);
   };
 
   const variants = {
@@ -309,12 +730,52 @@ export default function PropertyDetailsPage() {
             className="absolute inset-0"
           >
             <Image
-              src={property.images[currentImageIndex]}
+              src={currentImages[currentImageIndex]?.image || property.images[currentImageIndex]}
               alt={property.title}
               fill
               className="object-cover"
               priority
             />
+            
+            {/* Room Status Overlay - Only for PG properties with room availability and rooms view */}
+            {property.propertyType === "PG" && selectedSpaceType === "rooms" && property.roomsAvailability && property.roomsAvailability[currentImageIndex] && (
+              <>
+                {/* Status Badge */}
+                <div className="absolute top-6 right-6 z-20">
+                  {property.roomsAvailability[currentImageIndex].status === "sold" ? (
+                    <span className="px-6 py-1.5 bg-red-600 text-white text-lg font-semibold rounded-full shadow-2xl">
+                      {t.sold}
+                    </span>
+                  ) : (
+                    <span className="px-6 py-1.5 bg-green-600 text-white text-lg font-semibold rounded-full shadow-2xl">
+                      {t.available}
+                    </span>
+                  )}
+                </div>
+
+                {/* Sold Overlay */}
+                {property.roomsAvailability[currentImageIndex].status === "sold" && (
+                  <div className="absolute inset-0 bg-red-900/40 flex items-center justify-center z-10">
+                    <span className="text-white text-8xl font-bold transform -rotate-12 opacity-60 drop-shadow-2xl">
+                      {t.sold}
+                    </span>
+                  </div>
+                )}
+
+                {/* Room Name Label */}
+                <div className="absolute bottom-24 left-6 z-20">
+                  <div className={`px-6 py-2 rounded-xl shadow-2xl ${
+                    property.roomsAvailability[currentImageIndex].status === "sold"
+                      ? "bg-red-600/90 text-white"
+                      : "bg-green-600/90 text-white"
+                  }`}>
+                    <p className="text-lg font-semibold">
+                      {property.roomsAvailability[currentImageIndex].name}
+                    </p>
+                  </div>
+                </div>
+              </>
+            )}
           </motion.div>
         </AnimatePresence>
 
@@ -334,7 +795,7 @@ export default function PropertyDetailsPage() {
 
         {/* Image Indicators */}
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-          {property.images.map((_: any, index: number) => (
+          {currentImages.map((_: any, index: number) => (
             <button
               key={index}
               onClick={() => {
@@ -350,6 +811,70 @@ export default function PropertyDetailsPage() {
           ))}
         </div>
       </div>
+
+      {/* Space Type Filter Buttons - Only for PG properties */}
+      {property.propertyType === "PG" && (
+        <div className="bg-white border-b border-gray-200 shadow-sm">
+          <div className="max-w-7xl mx-auto px-6 py-4">
+            <div className="flex gap-3 overflow-x-auto">
+              <button
+                onClick={() => handleSpaceTypeChange("rooms")}
+                className={`px-6 py-3 rounded-lg font-semibold whitespace-nowrap transition-all ${
+                  selectedSpaceType === "rooms"
+                    ? "bg-primary text-white shadow-md"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                }`}
+              >
+                {t.rooms} (
+                <span className="text-green-300 font-bold">
+                  {property.roomsAvailability?.filter((room: any) => room.status === "available").length || 0}
+                </span>
+                {" / "}
+                <span className="text-red-300 font-bold">
+                  {property.roomsAvailability?.filter((room: any) => room.status === "sold").length || 0}
+                </span>
+                )
+              </button>
+              {property.kitchenImages && property.kitchenImages.length > 0 && (
+                <button
+                  onClick={() => handleSpaceTypeChange("kitchen")}
+                  className={`px-6 py-3 rounded-lg font-semibold whitespace-nowrap transition-all ${
+                    selectedSpaceType === "kitchen"
+                      ? "bg-primary text-white shadow-md"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
+                >
+                  {t.kitchen} ({property.kitchenImages.length})
+                </button>
+              )}
+              {property.washroomImages && property.washroomImages.length > 0 && (
+                <button
+                  onClick={() => handleSpaceTypeChange("washroom")}
+                  className={`px-6 py-3 rounded-lg font-semibold whitespace-nowrap transition-all ${
+                    selectedSpaceType === "washroom"
+                      ? "bg-primary text-white shadow-md"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
+                >
+                  {t.washroom} ({property.washroomImages.length})
+                </button>
+              )}
+              {property.commonAreaImages && property.commonAreaImages.length > 0 && (
+                <button
+                  onClick={() => handleSpaceTypeChange("commonArea")}
+                  className={`px-6 py-3 rounded-lg font-semibold whitespace-nowrap transition-all ${
+                    selectedSpaceType === "commonArea"
+                      ? "bg-primary text-white shadow-md"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
+                >
+                  {t.commonArea} ({property.commonAreaImages.length})
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Content */}
       <div className="max-w-7xl mx-auto px-6 py-8">
@@ -859,6 +1384,23 @@ export default function PropertyDetailsPage() {
           </div>
         </div>
       )}
+
+      {/* Sticky WhatsApp Button */}
+      <a
+        href={`https://wa.me/${property.landlord.phone.replace(/\s/g, '')}?text=${encodeURIComponent(`Hi, I'm interested in ${property.title} at ${property.location}`)}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-50 w-12 h-12 bg-green-700 text-white rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 group"
+      >
+        <MessageCircle className="w-6 h-6" />
+        
+        {/* Tooltip */}
+        <span className="absolute right-full mr-3 px-4 py-1.5 bg-gray-900 text-white text-xs font-medium rounded-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-lg">
+          Chat on WhatsApp with owner
+          {/* Arrow */}
+          <span className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 bg-gray-900 transform rotate-45"></span>
+        </span>
+      </a>
     </div>
   );
 }
