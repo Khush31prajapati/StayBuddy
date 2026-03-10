@@ -17,7 +17,6 @@ import {
   Ban,
   Shield,
   MapPin,
-  Search,
   Filter,
 } from "lucide-react";
 

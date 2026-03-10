@@ -57,7 +57,7 @@ export default function SubscribeSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateEmail(email)) {
       setSubmitStatus("error");
       setErrorMessage(t.invalidEmail);
@@ -74,13 +74,13 @@ export default function SubscribeSection() {
     // Simulate API call
     try {
       await new Promise((resolve) => setTimeout(resolve, 1500));
-      
+
       // Here you would make an actual API call to save the subscription
       // await fetch('/api/subscribe', { method: 'POST', body: JSON.stringify({ email }) });
-      
+
       setSubmitStatus("success");
       setEmail("");
-      
+
       // Reset success message after 5 seconds
       setTimeout(() => {
         setSubmitStatus("idle");
@@ -88,7 +88,7 @@ export default function SubscribeSection() {
     } catch (error) {
       setSubmitStatus("error");
       setErrorMessage(t.errorMessage);
-      
+
       setTimeout(() => {
         setSubmitStatus("idle");
         setErrorMessage("");
@@ -109,11 +109,11 @@ export default function SubscribeSection() {
                 <Sparkles className="w-4 h-4" />
                 <span className="text-xs font-semibold">{t.badge}</span>
               </div>
-              
+
               <h2 className="text-2xl sm:text-3xl font-bold mb-3 leading-tight">
                 {t.title}
               </h2>
-              
+
               <p className="text-white/90 text-sm sm:text-base mb-6 leading-relaxed">
                 {t.subtitle}
               </p>
@@ -138,12 +138,12 @@ export default function SubscribeSection() {
                   <Bell className="w-7 h-7 text-primary" />
                 </div>
                 <div>
-                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 ">
-                  Subscribe for Updates
-                </h3>
-                <p className="text-sm text-gray-600">
-                  Join our community and never miss an opportunity
-                </p>
+                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 ">
+                    Subscribe for Updates
+                  </h3>
+                  <p className="text-sm text-gray-600">
+                    Join our community and never miss an opportunity
+                  </p>
                 </div>
               </div>
 

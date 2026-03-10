@@ -9,16 +9,11 @@ import {
   MessageSquare,
   Calendar,
   User,
-  Settings,
   LogOut,
   MapPin,
   Eye,
   Trash2,
   Send,
-  CheckCircle,
-  Clock,
-  XCircle,
-  Edit,
   Camera,
   Lock,
   Mail,
@@ -28,8 +23,6 @@ import {
 export default function TenantDashboard() {
   const { language, t } = useLanguage();
   const [activeTab, setActiveTab] = useState("saved");
-  const [showProfileEdit, setShowProfileEdit] = useState(false);
-  const [showPasswordChange, setShowPasswordChange] = useState(false);
   const currencySymbol = t("currency.symbol");
 
   // Mock data - in real app, this would come from API

@@ -92,15 +92,6 @@ export default function PostPropertyPage() {
   const [uspCategory, setUspCategory] = useState("");
   const [uspText, setUspText] = useState("");
   const [pgDescription, setPgDescription] = useState("");
-  const [uploadedImages, setUploadedImages] = useState<Record<string, File[]>>({
-    singleRoom: [],
-    buildingView: [],
-    commonArea: [],
-    commonAmenities: [],
-    kitchen: [],
-    neighbourhoodView: [],
-    mapView: []
-  });
   
   // PG Room Images with status
   const [roomImages, setRoomImages] = useState<Array<{ id: string; name: string; status: 'vacant' | 'occupied'; file: File | null }>>([]);
@@ -650,7 +641,6 @@ export default function PostPropertyPage() {
   // Currency symbol based on language from translations
   const { t: translate } = useLanguage();
   const currencySymbol = translate('currency.symbol');
-  const currencyName = translate('currency.name');
 
   // Handler functions
   const scrollToTop = () => {
@@ -818,23 +808,6 @@ export default function PostPropertyPage() {
 
   const useSampleDescription = (sample: string) => {
     setPgDescription(sample);
-  };
-
-  const handleImageUpload = (category: string, files: FileList | null) => {
-    if (files) {
-      const fileArray = Array.from(files);
-      setUploadedImages(prev => ({
-        ...prev,
-        [category]: [...prev[category], ...fileArray]
-      }));
-    }
-  };
-
-  const removeImage = (category: string, index: number) => {
-    setUploadedImages(prev => ({
-      ...prev,
-      [category]: prev[category].filter((_, i) => i !== index)
-    }));
   };
 
   // PG Room Image Handlers

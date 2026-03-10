@@ -10,24 +10,19 @@ import {
   Calendar,
   User,
   LogOut,
-  Eye,
   Edit,
   Trash2,
   MapPin,
-  CheckCircle,
-  Clock,
-  XCircle,
   Send,
   Plus,
   Grid3x3,
   List,
+  Eye,
 } from "lucide-react";
 
 export default function OwnerDashboard() {
   const { language, t } = useLanguage();
   const [activeTab, setActiveTab] = useState("listings");
-  const [selectedProperty, setSelectedProperty] = useState<any>(null);
-  const [showEditModal, setShowEditModal] = useState(false);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const currencySymbol = t("currency.symbol");
 
@@ -392,14 +387,20 @@ export default function OwnerDashboard() {
                                   <p className="font-bold text-gray-900">{listing.inquiries}</p>
                                 </div>
                               </div>
-                              <div className="flex gap-2">
-                                <button className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm">
-                                  <Edit className="w-4 h-4" />
-                                  {tc.edit}
-                                </button>
-                                <button className="flex items-center justify-center gap-2 px-3 py-2 border border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition-colors text-sm">
-                                  <Trash2 className="w-4 h-4" />
-                                </button>
+                              <div className="flex flex-col gap-2">
+                                <Link href={`/property/${listing.id}`} className="flex items-center justify-center gap-2 px-3 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm">
+                                  <Eye className="w-4 h-4" />
+                                  {tc.viewDetails}
+                                </Link>
+                                <div className="flex gap-2">
+                                  <button className="flex-1 flex items-center justify-center gap-2 px-3 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm">
+                                    <Edit className="w-4 h-4" />
+                                    {tc.edit}
+                                  </button>
+                                  <button className="flex items-center justify-center gap-2 px-3 py-2 border border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition-colors text-sm">
+                                    <Trash2 className="w-4 h-4" />
+                                  </button>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -468,12 +469,16 @@ export default function OwnerDashboard() {
                                   </div>
                                 </div>
 
-                                <div className="flex gap-2">
-                                  <button className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors">
+                                <div className="flex flex-wrap gap-2">
+                                  <Link href={`/property/${listing.id}`} className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm sm:text-base">
+                                    <Eye className="w-4 h-4" />
+                                    {tc.viewDetails}
+                                  </Link>
+                                  <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm sm:text-base">
                                     <Edit className="w-4 h-4" />
                                     {tc.edit}
                                   </button>
-                                  <button className="flex items-center gap-2 px-4 py-2 border border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition-colors">
+                                  <button className="flex items-center gap-2 px-4 py-2 border border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition-colors text-sm sm:text-base">
                                     <Trash2 className="w-4 h-4" />
                                     {tc.delete}
                                   </button>

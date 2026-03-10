@@ -22,6 +22,8 @@ const properties = [
     ],
     isNew: true,
     verified: true,
+    rating: 4.6,
+    reviewsCount: 24,
   },
   {
     id: "2",
@@ -38,6 +40,8 @@ const properties = [
     ],
     isNew: true,
     verified: false,
+    rating: 3.8,
+    reviewsCount: 12,
   },
   {
     id: "3",
@@ -54,6 +58,8 @@ const properties = [
     ],
     isNew: true,
     verified: true,
+    rating: 4.9,
+    reviewsCount: 42,
   },
   {
     id: "4",
@@ -70,6 +76,8 @@ const properties = [
     ],
     isNew: true,
     verified: false,
+    rating: 4.2,
+    reviewsCount: 8,
   },
   {
     id: "5",
@@ -86,6 +94,8 @@ const properties = [
     ],
     badge: "Premium",
     verified: true,
+    rating: 5.0,
+    reviewsCount: 18,
   },
   {
     id: "6",
@@ -100,6 +110,8 @@ const properties = [
       "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
     ],
+    rating: 4.1,
+    reviewsCount: 35,
   },
   {
     id: "7",
@@ -115,6 +127,8 @@ const properties = [
       "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
     ],
     isNew: true,
+    rating: 4.5,
+    reviewsCount: 15,
   },
   {
     id: "8",
@@ -129,6 +143,8 @@ const properties = [
       "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
     ],
+    rating: 3.9,
+    reviewsCount: 22,
   },
 ];
 

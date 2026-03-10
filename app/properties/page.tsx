@@ -23,6 +23,8 @@ const allProperties = [
     ],
     isNew: true,
     verified: true,
+    rating: 4.6,
+    reviewsCount: 24,
   },
   {
     id: "2",
@@ -39,6 +41,8 @@ const allProperties = [
     ],
     isNew: true,
     verified: true,
+    rating: 3.8,
+    reviewsCount: 12,
   },
   {
     id: "3",
@@ -55,6 +59,8 @@ const allProperties = [
     ],
     isNew: true,
     verified: false,
+    rating: 4.9,
+    reviewsCount: 42,
   },
   {
     id: "4",
@@ -71,6 +77,8 @@ const allProperties = [
     ],
     isNew: true,
     verified: true,
+    rating: 4.2,
+    reviewsCount: 8,
   },
   {
     id: "5",
@@ -87,6 +95,8 @@ const allProperties = [
     ],
     badge: "Premium",
     verified: true,
+    rating: 5.0,
+    reviewsCount: 18,
   },
   {
     id: "6",
@@ -101,6 +111,8 @@ const allProperties = [
       "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
     ],
+    rating: 4.1,
+    reviewsCount: 35,
   },
   {
     id: "7",
@@ -116,6 +128,8 @@ const allProperties = [
       "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
     ],
     isNew: true,
+    rating: 4.5,
+    reviewsCount: 15,
   },
   {
     id: "8",
@@ -130,6 +144,8 @@ const allProperties = [
       "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
     ],
+    rating: 3.9,
+    reviewsCount: 22,
   },
   {
     id: "9",
@@ -145,6 +161,8 @@ const allProperties = [
       "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
     ],
     badge: "Sea View",
+    rating: 4.8,
+    reviewsCount: 56,
   },
   {
     id: "10",
@@ -159,6 +177,8 @@ const allProperties = [
       "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
     ],
+    rating: 4.4,
+    reviewsCount: 31,
   },
   {
     id: "11",
@@ -174,6 +194,8 @@ const allProperties = [
       "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
     ],
     isNew: true,
+    rating: 4.7,
+    reviewsCount: 19,
   },
   {
     id: "12",
@@ -188,6 +210,8 @@ const allProperties = [
       "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
     ],
+    rating: 4.3,
+    reviewsCount: 27,
   },
   {
     id: "13",
@@ -203,6 +227,8 @@ const allProperties = [
       "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
     ],
     isNew: true,
+    rating: 3.5,
+    reviewsCount: 5,
   },
   {
     id: "14",
@@ -219,6 +245,8 @@ const allProperties = [
     ],
     badge: "Family Friendly",
     isNew: true,
+    rating: 4.6,
+    reviewsCount: 14,
   },
 ];
 

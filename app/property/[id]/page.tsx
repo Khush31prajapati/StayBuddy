@@ -5,10 +5,58 @@ import { useParams } from "next/navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight, Heart, MapPin, Home, Maximize, Calendar, Phone, Mail, Share2, X, Send, MessageCircle, CheckCircle } from "lucide-react";
+import { ChevronLeft, ChevronRight, Heart, MapPin, Mail, Share2, X, MessageCircle, CheckCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ContactOwnerForm from "@/components/ContactOwnerForm";
 import SubscribeSection from "@/components/SubscribeSection";
+import ReviewSection from "@/components/ReviewSection";
+
+const defaultReviews = [
+  {
+    id: "r1",
+    userName: "Sarah Jenkins",
+    date: "October 2023",
+    rating: 5,
+    comment: "Absolutely loved my stay here! The apartment was exactly as described, very clean, and the balcony view was stunning. The property manager was also very responsive to our needs.",
+    helpfulCount: 12
+  },
+  {
+    id: "r2",
+    userName: "Mikel Arteta",
+    date: "September 2023",
+    rating: 4,
+    comment: "Great location and very spacious. The kitchen amenities were good, though the Wi-Fi was slightly spotty in the guest bedroom. Overall, a great experience.",
+    helpfulCount: 5
+  },
+  {
+    id: "r3",
+    userName: "Emma Watson",
+    date: "August 2023",
+    rating: 5,
+    comment: "Perfect place for a long-term stay. The neighborhood is quiet but well-connected. I highly recommend it!",
+    helpfulCount: 8
+  },
+  {
+    id: "r4",
+    userName: "David Chen",
+    date: "July 2023",
+    rating: 3,
+    comment: "The apartment is nice, but it was a bit noisy during the weekends because of the street below. Keep that in mind if you are a light sleeper.",
+    helpfulCount: 2
+  }
+];
+
+const defaultRatingStats = {
+  average: 4.6,
+  total: 24,
+  distribution: {
+    5: 16,
+    4: 5,
+    3: 2,
+    2: 1,
+    1: 0
+  }
+};
 
 // Mock property data - in real app, this would come from API/database
 const propertyData: { [key: string]: any } = {
@@ -635,7 +683,6 @@ export default function PropertyDetailsPage() {
   const [direction, setDirection] = useState(0);
   const [showContactForm, setShowContactForm] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
   const [selectedSpaceType, setSelectedSpaceType] = useState<string>("rooms");
 
@@ -1326,6 +1373,14 @@ export default function PropertyDetailsPage() {
                 <p className="text-sm sm:text-base text-gray-500">Map placeholder</p>
               </div>
             </div>
+
+            {/* Reviews Section */}
+            <ReviewSection 
+              stats={property.rating || defaultRatingStats} 
+              reviews={property.reviews || defaultReviews} 
+              language={language}
+              t={t}
+            />
 
             {/* Related Listings Section */}
             <div className="bg-white rounded-lg sm:rounded-xl shadow-md p-4 sm:p-5 md:p-6">
