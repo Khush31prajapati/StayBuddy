@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { MapPin, TrendingUp, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useParams } from "next/navigation";
 
 interface CityCardProps {
   name: string;
@@ -15,7 +16,7 @@ interface CityCardProps {
 
 const CityCard = ({ name, propertyCount, image, size = "medium", trending }: CityCardProps) => {
   const { t } = useLanguage();
-  
+
   const sizeClasses = {
     large: "col-span-1 md:col-span-2 row-span-1 md:row-span-2 h-[280px] md:h-[420px]",
     medium: "col-span-1 row-span-1 h-[280px] md:h-[200px]",
@@ -73,7 +74,7 @@ const CityCard = ({ name, propertyCount, image, size = "medium", trending }: Cit
               {propertyCount} {propertyCount === 1 ? t("cityExplorer.property") : t("cityExplorer.properties")}
             </p>
           </div>
-          
+
           {/* Hover Button */}
           <motion.button
             whileHover={{ scale: 1.05, x: 5 }}
@@ -96,41 +97,82 @@ const CityCard = ({ name, propertyCount, image, size = "medium", trending }: Cit
 
 export default function CityExplorer() {
   const { t } = useLanguage();
-  
-  const cities = [
+  const params = useParams();
+  const country = params?.country as string;
+
+  const indianCities = [
     {
-      name: "Mumbai",
-      propertyCount: 842,
-      image: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?q=80&w=2070&auto=format&fit=crop",
+      name: "Ahmedabad",
+      propertyCount: 742,
+      image: "https://images.unsplash.com/photo-1580655653885-65763b2597d0",
       size: "large" as const,
       trending: true,
     },
     {
-      name: "Delhi",
-      propertyCount: 567,
-      image: "https://images.unsplash.com/photo-1587474260584-136574528ed5?q=80&w=2070&auto=format&fit=crop",
+      name: "Surat",
+      propertyCount: 418,
+      image: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?q=80&w=2070&auto=format&fit=crop",
       size: "medium" as const,
     },
     {
-      name: "Bangalore",
-      propertyCount: 923,
-      image: "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?q=80&w=2070&auto=format&fit=crop",
+      name: "Vadodara",
+      propertyCount: 312,
+      image: "https://images.unsplash.com/photo-1587474260584-136574528ed5?q=80&w=2070&auto=format&fit=crop",
       size: "medium" as const,
       trending: true,
     },
     {
-      name: "Pune",
-      propertyCount: 456,
-      image: "https://images.unsplash.com/photo-1595658658481-d53d3f999875?q=80&w=2070&auto=format&fit=crop",
+      name: "Gandhinagar",
+      propertyCount: 189,
+      image: "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?q=80&w=2070&auto=format&fit=crop",
       size: "small" as const,
     },
     {
-      name: "Hyderabad",
-      propertyCount: 634,
-      image: "https://images.unsplash.com/photo-1609920658906-8223bd289001?q=80&w=2070&auto=format&fit=crop",
+      name: "Rajkot",
+      propertyCount: 254,
+      image: "https://images.unsplash.com/photo-1595658658481-d53d3f999875?q=80&w=2070&auto=format&fit=crop",
       size: "small" as const,
     },
   ];
+
+  const frenchCities = [
+    {
+      name: "Paris",
+      propertyCount: 1284,
+      image: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?q=80&w=2020&auto=format&fit=crop",
+      size: "large" as const,
+      trending: true,
+    },
+    {
+      name: "Lyon",
+      propertyCount: 563,
+      image: "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?q=80&w=2069&auto=format&fit=crop",
+      size: "medium" as const,
+    },
+    {
+      name: "Marseille",
+      propertyCount: 487,
+      image: "https://images.unsplash.com/photo-1516912481808-3406841bd33c?q=80&w=2044&auto=format&fit=crop",
+      size: "medium" as const,
+      trending: true,
+    },
+    {
+      name: "Toulouse",
+      propertyCount: 321,
+      image: "https://images.unsplash.com/photo-1562979314-bee7453e911c?q=80&w=2070&auto=format&fit=crop",
+      size: "small" as const,
+    },
+    {
+      name: "Nice",
+      propertyCount: 398,
+      image: "https://images.unsplash.com/photo-1533929736458-ca588d08c8be?q=80&w=2070&auto=format&fit=crop",
+      size: "small" as const,
+    },
+  ];
+
+  const cities = country === "fr" ? frenchCities : indianCities;
+
+
 
   return (
     <div className="w-full bg-white py-8 px-4">
@@ -164,8 +206,8 @@ export default function CityExplorer() {
                 city.size === "large"
                   ? "md:col-span-2 md:row-span-2"
                   : city.size === "medium"
-                  ? "md:col-span-1 md:row-span-1"
-                  : "md:col-span-1 md:row-span-1"
+                    ? "md:col-span-1 md:row-span-1"
+                    : "md:col-span-1 md:row-span-1"
               }
             >
               <CityCard {...city} />
