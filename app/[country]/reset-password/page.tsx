@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
+import Link from "@/components/LocalizedLink";
 import { Lock, Eye, EyeOff, CheckCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 

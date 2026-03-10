@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useParams } from "next/navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/LocalizedLink";
 import { ChevronLeft, ChevronRight, Heart, MapPin, Mail, Share2, X, MessageCircle, CheckCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ContactOwnerForm from "@/components/ContactOwnerForm";
@@ -146,11 +146,11 @@ const propertyData: { [key: string]: any } = {
     priceStatus: "below average",
     isNew: true
   },
-  "2": {
-    id: "2",
+  "202": {
+    id: "202",
     title: "Spacious Studio Apartment",
-    location: "Alterric France, Rue du Dépôt, 60280 Venette",
-    fullAddress: "Alterric France, Rue du Dépôt, 60280 Venette, France",
+    location: "Rue du Dépôt, 60280 Venette, France",
+    fullAddress: "Rue du Dépôt, 60280 Venette, France",
     price: 695,
     deposit: 1390,
     rooms: 1,
@@ -480,10 +480,10 @@ const propertyData: { [key: string]: any } = {
     priceStatus: "below average",
     badge: "Premium"
   },
-  "6": {
-    id: "6",
+  "206": {
+    id: "206",
     title: "Student-Friendly PG",
-    location: "Lyon 7th, Rhône-Alpes",
+    location: "Lyon 7th, Rhône-Alpes, France",
     fullAddress: "Lyon 7th, Rhône-Alpes, France",
     price: 850,
     deposit: 1700,
@@ -544,10 +544,10 @@ const propertyData: { [key: string]: any } = {
     },
     priceStatus: "below average"
   },
-  "8": {
-    id: "8",
+  "208": {
+    id: "208",
     title: "Renovated Studio",
-    location: "Toulouse Centre, Haute-Garonne",
+    location: "Toulouse Centre, Haute-Garonne, France",
     fullAddress: "Toulouse Centre, Haute-Garonne, France",
     price: 650,
     deposit: 1300,
@@ -601,10 +601,10 @@ const propertyData: { [key: string]: any } = {
     },
     priceStatus: "below average"
   },
-  "13": {
-    id: "13",
-    title: "Cozy PG Near University",
-    location: "Montpellier Centre, Hérault",
+  "204": {
+    id: "204",
+    title: "Cozy Studio Near University",
+    location: "Montpellier Centre, Hérault, France",
     fullAddress: "Montpellier Centre, Hérault, France",
     price: 580,
     deposit: 1160,

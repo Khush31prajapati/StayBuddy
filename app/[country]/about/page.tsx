@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Search, Home, CheckCircle, Users, Building2, Image as ImageIcon, Calendar, MessageSquare, Shield, Smartphone, TrendingUp, Target } from 'lucide-react';
-import Link from 'next/link';
+import Link from "@/components/LocalizedLink";
 
 export default function AboutPage() {
   const tenantFeatures = [

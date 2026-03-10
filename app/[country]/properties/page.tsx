@@ -1,15 +1,156 @@
 "use client";
 
 import { useState, useEffect, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useParams } from "next/navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import PropertyCard from "@/components/PropertyCard";
 import SubscribeSection from "@/components/SubscribeSection";
 import { Search, SlidersHorizontal, X, ChevronDown } from "lucide-react";
 
+// Indian properties: IDs start with "1" → shown on /in
+// French properties: IDs start with "2" → shown on /fr
 const allProperties = [
+  // ── Indian Properties (Gujarat) ──
   {
-    id: "1",
+    id: "101",
+    title: "Premium PG in Navrangpura",
+    location: "Navrangpura, Ahmedabad, Gujarat",
+    price: 15000,
+    rooms: 1,
+    area: 25,
+    type: "PG" as const,
+    images: [
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
+    ],
+    badge: "Premium",
+    verified: true,
+    rating: 4.8,
+    reviewsCount: 56,
+  },
+  {
+    id: "102",
+    title: "Cozy 2BHK Apartment",
+    location: "Info City, Gandhinagar, Gujarat",
+    price: 25000,
+    rooms: 2,
+    area: 75,
+    type: "Tenant" as const,
+    images: [
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
+    ],
+    rating: 4.5,
+    reviewsCount: 35,
+  },
+  {
+    id: "103",
+    title: "Student-Friendly PG",
+    location: "Vesu, Surat, Gujarat",
+    price: 8500,
+    rooms: 1,
+    area: 18,
+    type: "PG" as const,
+    images: [
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
+    ],
+    isNew: true,
+    verified: false,
+    rating: 4.1,
+    reviewsCount: 15,
+  },
+  {
+    id: "104",
+    title: "Luxury Independent House",
+    location: "Alkapuri, Vadodara, Gujarat",
+    price: 55000,
+    rooms: 4,
+    area: 140,
+    type: "Tenant" as const,
+    images: [
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
+    ],
+    verified: true,
+    rating: 4.9,
+    reviewsCount: 22,
+  },
+  {
+    id: "105",
+    title: "Affordable PG for Boys",
+    location: "Vastrapur, Ahmedabad, Gujarat",
+    price: 6500,
+    rooms: 1,
+    area: 20,
+    type: "PG" as const,
+    images: [
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
+    ],
+    rating: 3.9,
+    reviewsCount: 12,
+  },
+  {
+    id: "106",
+    title: "Modern 3BHK Flat",
+    location: "Sector 21, Gandhinagar, Gujarat",
+    price: 35000,
+    rooms: 3,
+    area: 110,
+    type: "Tenant" as const,
+    images: [
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
+    ],
+    isNew: true,
+    rating: 4.7,
+    reviewsCount: 41,
+  },
+  {
+    id: "107",
+    title: "Girls PG with Meals",
+    location: "Satellite, Ahmedabad, Gujarat",
+    price: 11000,
+    rooms: 1,
+    area: 22,
+    type: "PG" as const,
+    images: [
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
+    ],
+    verified: true,
+    badge: "Meals Included",
+    rating: 4.6,
+    reviewsCount: 29,
+  },
+  {
+    id: "108",
+    title: "Spacious Villa with Garden",
+    location: "Adajan, Surat, Gujarat",
+    price: 95000,
+    rooms: 5,
+    area: 300,
+    type: "Tenant" as const,
+    images: [
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
+    ],
+    verified: true,
+    rating: 5.0,
+    reviewsCount: 14,
+  },
+  // ── French Properties ──
+  {
+    id: "201",
     title: "Beautiful Apartment with Balcony",
     location: "10 Rue Georges Pompidou, Talence, France",
     price: 1100,
@@ -27,9 +168,9 @@ const allProperties = [
     reviewsCount: 24,
   },
   {
-    id: "2",
+    id: "202",
     title: "Spacious Studio Apartment",
-    location: "Alterric France, Rue du Dépôt, 60280 Venette",
+    location: "Rue du Dépôt, 60280 Venette, France",
     price: 695,
     rooms: 1,
     area: 37,
@@ -40,14 +181,14 @@ const allProperties = [
       "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
     ],
     isNew: true,
-    verified: true,
+    verified: false,
     rating: 3.8,
     reviewsCount: 12,
   },
   {
-    id: "3",
+    id: "203",
     title: "Modern Apartment with Garden View",
-    location: "Aix-en-Provence, Bouches-du-Rhône",
+    location: "Aix-en-Provence, Bouches-du-Rhône, France",
     price: 1500,
     rooms: 3,
     area: 70,
@@ -58,32 +199,30 @@ const allProperties = [
       "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
     ],
     isNew: true,
-    verified: false,
+    verified: true,
     rating: 4.9,
     reviewsCount: 42,
   },
   {
-    id: "4",
-    title: "Cozy One Room Apartment",
-    location: "Bitic-Etables-sur-Mer, Côtes-d'Armor",
+    id: "204",
+    title: "Cozy Studio Near University",
+    location: "Montpellier Centre, Hérault, France",
     price: 560,
     rooms: 1,
     area: 32,
-    type: "Tenant" as const,
+    type: "PG" as const,
     images: [
       "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
     ],
-    isNew: true,
-    verified: true,
     rating: 4.2,
     reviewsCount: 8,
   },
   {
-    id: "5",
+    id: "205",
     title: "Luxury Penthouse",
-    location: "Paris 16th, Île-de-France",
+    location: "Paris 16th, Île-de-France, France",
     price: 2800,
     rooms: 4,
     area: 120,
@@ -99,9 +238,9 @@ const allProperties = [
     reviewsCount: 18,
   },
   {
-    id: "6",
+    id: "206",
     title: "Student-Friendly Apartment",
-    location: "Lyon 7th, Rhône-Alpes",
+    location: "Lyon 7th, Rhône-Alpes, France",
     price: 850,
     rooms: 2,
     area: 45,
@@ -115,9 +254,9 @@ const allProperties = [
     reviewsCount: 35,
   },
   {
-    id: "7",
+    id: "207",
     title: "Charming Apartment Near Metro",
-    location: "Marseille 8th, Bouches-du-Rhône",
+    location: "Marseille 8th, Bouches-du-Rhône, France",
     price: 1200,
     rooms: 3,
     area: 75,
@@ -132,9 +271,9 @@ const allProperties = [
     reviewsCount: 15,
   },
   {
-    id: "8",
+    id: "208",
     title: "Renovated Studio",
-    location: "Toulouse Centre, Haute-Garonne",
+    location: "Toulouse Centre, Haute-Garonne, France",
     price: 650,
     rooms: 1,
     area: 28,
@@ -147,108 +286,8 @@ const allProperties = [
     rating: 3.9,
     reviewsCount: 22,
   },
-  {
-    id: "9",
-    title: "Bright Apartment with Terrace",
-    location: "Nice Promenade, Alpes-Maritimes",
-    price: 1800,
-    rooms: 2,
-    area: 55,
-    type: "Tenant" as const,
-    images: [
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
-    ],
-    badge: "Sea View",
-    rating: 4.8,
-    reviewsCount: 56,
-  },
-  {
-    id: "10",
-    title: "Family Apartment",
-    location: "Bordeaux Centre, Gironde",
-    price: 1350,
-    rooms: 4,
-    area: 95,
-    type: "Tenant" as const,
-    images: [
-      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
-    ],
-    rating: 4.4,
-    reviewsCount: 31,
-  },
-  {
-    id: "11",
-    title: "Modern Loft",
-    location: "Lille Vieux, Nord",
-    price: 950,
-    rooms: 2,
-    area: 60,
-    type: "Tenant" as const,
-    images: [
-      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
-    ],
-    isNew: true,
-    rating: 4.7,
-    reviewsCount: 19,
-  },
-  {
-    id: "12",
-    title: "Elegant Apartment",
-    location: "Strasbourg Centre, Bas-Rhin",
-    price: 1100,
-    rooms: 3,
-    area: 78,
-    type: "Tenant" as const,
-    images: [
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
-    ],
-    rating: 4.3,
-    reviewsCount: 27,
-  },
-  {
-    id: "13",
-    title: "Cozy PG Near University",
-    location: "Montpellier Centre, Hérault",
-    price: 580,
-    rooms: 1,
-    area: 25,
-    type: "PG" as const,
-    images: [
-      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
-    ],
-    isNew: true,
-    rating: 3.5,
-    reviewsCount: 5,
-  },
-  {
-    id: "14",
-    title: "Spacious Family Home",
-    location: "Nantes Erdre, Loire-Atlantique",
-    price: 1650,
-    rooms: 4,
-    area: 110,
-    type: "Tenant" as const,
-    images: [
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
-    ],
-    badge: "Family Friendly",
-    isNew: true,
-    rating: 4.6,
-    reviewsCount: 14,
-  },
 ];
+
 
 type PropertyType = "all" | "pg" | "tenant";
 type SortType = "price-low" | "price-high" | "newest" | "rooms";
@@ -467,7 +506,16 @@ function PropertiesPageContent() {
   };
 
   // Filter and sort properties
+  const params = useParams();
+  const country = params?.country as string || 'in';
+
   let filteredProperties = allProperties.filter((property) => {
+    // The mock data is generated such that Indian IDs begin with "1" and French IDs begin with "2"
+    const propertyCountry = property.id.startsWith("2") ? "fr" : "in";
+    
+    // Validate country bounds first
+    if (propertyCountry !== country) return false;
+
     const query = searchQuery.toLowerCase().trim();
     
     // Enhanced search filter - searches by location, price, and property type

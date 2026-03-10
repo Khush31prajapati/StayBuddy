@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { useParams } from "next/navigation";
 
 type Language = "en" | "fr";
 
@@ -19,14 +20,18 @@ const translations = {
 };
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<Language>("en");
+  const params = useParams();
+  const country = params?.country as string;
+
+  // Initialize with the language based on country routing
+  const [language, setLanguageState] = useState<Language>(country === "fr" ? "fr" : "en");
 
   useEffect(() => {
-    const savedLang = localStorage.getItem("language") as Language;
-    if (savedLang && (savedLang === "en" || savedLang === "fr")) {
-      setLanguageState(savedLang);
+    // Automatically switch language when navigating between country routes
+    if (country) {
+      setLanguageState(country === "fr" ? "fr" : "en");
     }
-  }, []);
+  }, [country]);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);

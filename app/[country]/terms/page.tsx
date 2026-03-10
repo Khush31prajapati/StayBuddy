@@ -1,7 +1,7 @@
 "use client";
 
 import { useLanguage } from "@/contexts/LanguageContext";
-import Link from "next/link";
+import Link from "@/components/LocalizedLink";
 import { ArrowLeft, FileText, Shield, Users, Home, CreditCard, AlertCircle, Scale, Mail, Phone, MapPin } from "lucide-react";
 
 export default function TermsAndConditionsPage() {

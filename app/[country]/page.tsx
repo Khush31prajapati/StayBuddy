@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/LocalizedLink";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import FilterSection from "@/components/FilterSection";

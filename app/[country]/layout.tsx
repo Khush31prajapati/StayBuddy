@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { LanguageProvider } from "@/contexts/LanguageContext";
@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const isDashboard = pathname?.startsWith("/dashboard");
+  const isDashboard = pathname?.includes("/dashboard");
 
   return (
     <html lang="en">
