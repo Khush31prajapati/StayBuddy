@@ -8,6 +8,7 @@ import Link from "next/link";
 import { ChevronLeft, ChevronRight, Heart, MapPin, Home, Maximize, Calendar, Phone, Mail, Share2, X, Send, MessageCircle, CheckCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ContactOwnerForm from "@/components/ContactOwnerForm";
+import SubscribeSection from "@/components/SubscribeSection";
 
 // Mock property data - in real app, this would come from API/database
 const propertyData: { [key: string]: any } = {
@@ -30,6 +31,51 @@ const propertyData: { [key: string]: any } = {
       "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
     ],
+    roomImages: [
+      {
+        id: "room1",
+        name: "Bedroom 1",
+        image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop"
+      },
+      {
+        id: "room2",
+        name: "Bedroom 2",
+        image: "https://images.unsplash.com/photo-1540518614846-7eded433c457?q=80&w=2057&auto=format&fit=crop"
+      },
+      {
+        id: "room3",
+        name: "Living Room",
+        image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=2070&auto=format&fit=crop"
+      }
+    ],
+    kitchenImages: [
+      {
+        id: "kitchen1",
+        name: "Kitchen",
+        image: "https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=2068&auto=format&fit=crop"
+      }
+    ],
+    washroomImages: [
+      {
+        id: "washroom1",
+        name: "Bathroom 1",
+        image: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?q=80&w=2187&auto=format&fit=crop"
+      },
+      {
+        id: "washroom2",
+        name: "Bathroom 2",
+        image: "https://images.unsplash.com/photo-1604709177225-055f99402ea3?q=80&w=2070&auto=format&fit=crop"
+      }
+    ],
+    commonAreaImages: [
+      {
+        id: "common1",
+        name: "Balcony",
+        image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop"
+      }
+    ],
+    view360Available: true,
+    view360Url: "https://example.com/360-view",
     description: "Beautiful 3-bedroom apartment with modern amenities and stunning views. Perfect for families or professionals looking for a comfortable living space.",
     amenities: ["WiFi", "Parking", "Gym", "Security", "Elevator", "Balcony"],
     rules: {
@@ -176,6 +222,39 @@ const propertyData: { [key: string]: any } = {
       "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
     ],
+    roomImages: [
+      {
+        id: "room1",
+        name: "Master Bedroom",
+        image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop"
+      },
+      {
+        id: "room2",
+        name: "Bedroom 2",
+        image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop"
+      }
+    ],
+    kitchenImages: [
+      {
+        id: "kitchen1",
+        name: "Modern Kitchen",
+        image: "https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=2068&auto=format&fit=crop"
+      }
+    ],
+    washroomImages: [
+      {
+        id: "washroom1",
+        name: "Main Bathroom",
+        image: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?q=80&w=2187&auto=format&fit=crop"
+      }
+    ],
+    commonAreaImages: [
+      {
+        id: "common1",
+        name: "Garden View",
+        image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop"
+      }
+    ],
     description: "Modern 3-bedroom apartment with beautiful garden view. Spacious living areas and contemporary design.",
     amenities: ["WiFi", "Parking", "Garden View", "Security", "Elevator", "Balcony"],
     rules: {
@@ -217,6 +296,29 @@ const propertyData: { [key: string]: any } = {
       "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
     ],
+    roomImages: [
+      {
+        id: "room1",
+        name: "Studio Room",
+        image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop"
+      }
+    ],
+    kitchenImages: [
+      {
+        id: "kitchen1",
+        name: "Kitchenette",
+        image: "https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=2068&auto=format&fit=crop"
+      }
+    ],
+    washroomImages: [
+      {
+        id: "washroom1",
+        name: "Bathroom",
+        image: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?q=80&w=2187&auto=format&fit=crop"
+      }
+    ],
+    view360Available: true,
+    view360Url: "https://example.com/360-view-studio",
     description: "Cozy studio apartment perfect for singles or couples. Compact yet comfortable living space.",
     amenities: ["WiFi", "Furnished", "Kitchen", "Security"],
     rules: {
@@ -258,6 +360,56 @@ const propertyData: { [key: string]: any } = {
       "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
     ],
+    roomImages: [
+      {
+        id: "room1",
+        name: "Master Suite",
+        image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop"
+      },
+      {
+        id: "room2",
+        name: "Bedroom 2",
+        image: "https://images.unsplash.com/photo-1540518614846-7eded433c457?q=80&w=2057&auto=format&fit=crop"
+      },
+      {
+        id: "room3",
+        name: "Bedroom 3",
+        image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop"
+      }
+    ],
+    kitchenImages: [
+      {
+        id: "kitchen1",
+        name: "Luxury Kitchen",
+        image: "https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=2068&auto=format&fit=crop"
+      }
+    ],
+    washroomImages: [
+      {
+        id: "washroom1",
+        name: "Master Bathroom",
+        image: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?q=80&w=2187&auto=format&fit=crop"
+      },
+      {
+        id: "washroom2",
+        name: "Guest Bathroom",
+        image: "https://images.unsplash.com/photo-1604709177225-055f99402ea3?q=80&w=2070&auto=format&fit=crop"
+      }
+    ],
+    commonAreaImages: [
+      {
+        id: "common1",
+        name: "Terrace",
+        image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop"
+      },
+      {
+        id: "common2",
+        name: "Living Room",
+        image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=2070&auto=format&fit=crop"
+      }
+    ],
+    view360Available: true,
+    view360Url: "https://example.com/360-view-penthouse",
     description: "Luxury penthouse with panoramic city views. Premium finishes and top-tier amenities.",
     amenities: ["WiFi", "Parking", "Gym", "Pool", "Security", "Terrace", "Elevator"],
     rules: {
@@ -545,6 +697,7 @@ export default function PropertyDetailsPage() {
       kitchen: "Kitchen",
       washroom: "Washroom",
       commonArea: "Common Area",
+      view360: "360° View",
       relatedListings: "Related Properties",
       viewMore: "View more properties",
       share: "Share",
@@ -607,6 +760,7 @@ export default function PropertyDetailsPage() {
       kitchen: "Cuisine",
       washroom: "Salle de bain",
       commonArea: "Espace commun",
+      view360: "Vue 360°",
       relatedListings: "Propriétés similaires",
       viewMore: "Voir plus de propriétés",
       share: "Partager",
@@ -625,21 +779,33 @@ export default function PropertyDetailsPage() {
 
   // Get current images based on selected space type
   const getCurrentImages = () => {
-    if (property.propertyType !== "PG") {
-      return property.images;
-    }
-
-    switch (selectedSpaceType) {
-      case "rooms":
-        return property.roomsAvailability || [];
-      case "kitchen":
-        return property.kitchenImages || [];
-      case "washroom":
-        return property.washroomImages || [];
-      case "commonArea":
-        return property.commonAreaImages || [];
-      default:
-        return property.roomsAvailability || [];
+    if (property.propertyType === "PG") {
+      switch (selectedSpaceType) {
+        case "rooms":
+          return property.roomsAvailability || [];
+        case "kitchen":
+          return property.kitchenImages || [];
+        case "washroom":
+          return property.washroomImages || [];
+        case "commonArea":
+          return property.commonAreaImages || [];
+        default:
+          return property.roomsAvailability || [];
+      }
+    } else {
+      // For Tenant properties
+      switch (selectedSpaceType) {
+        case "rooms":
+          return property.roomImages || property.images;
+        case "kitchen":
+          return property.kitchenImages || [];
+        case "washroom":
+          return property.washroomImages || [];
+        case "commonArea":
+          return property.commonAreaImages || [];
+        default:
+          return property.images;
+      }
     }
   };
 
@@ -776,6 +942,29 @@ export default function PropertyDetailsPage() {
                 </div>
               </>
             )}
+            
+            {/* Room Name Label - For Tenant properties with room images */}
+            {property.propertyType === "Tenant" && selectedSpaceType === "rooms" && property.roomImages && property.roomImages[currentImageIndex] && (
+              <div className="absolute bottom-16 sm:bottom-20 md:bottom-24 left-3 sm:left-4 md:left-6 z-20">
+                <div className="px-3 py-1.5 sm:px-4 sm:py-2 md:px-6 md:py-2 rounded-lg sm:rounded-xl shadow-2xl bg-primary/90 text-white">
+                  <p className="text-sm sm:text-base md:text-lg font-semibold">
+                    {property.roomImages[currentImageIndex].name}
+                  </p>
+                </div>
+              </div>
+            )}
+            
+            {/* Space Name Label - For kitchen, washroom, common area */}
+            {(selectedSpaceType === "kitchen" || selectedSpaceType === "washroom" || selectedSpaceType === "commonArea") && 
+             currentImages[currentImageIndex] && (
+              <div className="absolute bottom-16 sm:bottom-20 md:bottom-24 left-3 sm:left-4 md:left-6 z-20">
+                <div className="px-3 py-1.5 sm:px-4 sm:py-2 md:px-6 md:py-2 rounded-lg sm:rounded-xl shadow-2xl bg-primary/90 text-white">
+                  <p className="text-sm sm:text-base md:text-lg font-semibold">
+                    {currentImages[currentImageIndex].name}
+                  </p>
+                </div>
+              </div>
+            )}
           </motion.div>
         </AnimatePresence>
 
@@ -812,29 +1001,43 @@ export default function PropertyDetailsPage() {
         </div>
       </div>
 
-      {/* Space Type Filter Buttons - Only for PG properties */}
-      {property.propertyType === "PG" && (
-        <div className="bg-white border-b border-gray-200 shadow-sm">
-          <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-3 sm:py-4">
+      {/* Space Type Filter Buttons - For both Tenant and PG properties */}
+      {(property.propertyType === "Tenant" || property.propertyType === "PG") && (
+        <div className="bg-white border-b border-gray-200 shadow-sm px-4">
+          <div className="max-w-7xl mx-auto py-3 sm:py-4">
             <div className="flex gap-2 sm:gap-3 overflow-x-auto scrollbar-hide">
-              <button
-                onClick={() => handleSpaceTypeChange("rooms")}
-                className={`px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 md:py-3 rounded-lg text-xs sm:text-sm md:text-base font-semibold whitespace-nowrap transition-all ${
-                  selectedSpaceType === "rooms"
-                    ? "bg-primary text-white shadow-md"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }`}
-              >
-                {t.rooms} (
-                <span className="text-green-300 font-bold">
-                  {property.roomsAvailability?.filter((room: any) => room.status === "available").length || 0}
-                </span>
-                {" / "}
-                <span className="text-red-300 font-bold">
-                  {property.roomsAvailability?.filter((room: any) => room.status === "sold").length || 0}
-                </span>
-                )
-              </button>
+              {/* Rooms Button */}
+              {((property.propertyType === "Tenant" && property.roomImages) || 
+                (property.propertyType === "PG" && property.roomsAvailability)) && (
+                <button
+                  onClick={() => handleSpaceTypeChange("rooms")}
+                  className={`px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 md:py-3 rounded-lg text-xs sm:text-sm md:text-base font-semibold whitespace-nowrap transition-all ${
+                    selectedSpaceType === "rooms"
+                      ? "bg-primary text-white shadow-md"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
+                >
+                  {t.rooms}
+                  {property.propertyType === "PG" && (
+                    <>
+                      {" ("}
+                      <span className="text-green-300 font-bold">
+                        {property.roomsAvailability?.filter((room: any) => room.status === "available").length || 0}
+                      </span>
+                      {" / "}
+                      <span className="text-red-300 font-bold">
+                        {property.roomsAvailability?.filter((room: any) => room.status === "sold").length || 0}
+                      </span>
+                      {")"}
+                    </>
+                  )}
+                  {property.propertyType === "Tenant" && property.roomImages && (
+                    <> ({property.roomImages.length})</>
+                  )}
+                </button>
+              )}
+              
+              {/* Kitchen Button */}
               {property.kitchenImages && property.kitchenImages.length > 0 && (
                 <button
                   onClick={() => handleSpaceTypeChange("kitchen")}
@@ -847,6 +1050,8 @@ export default function PropertyDetailsPage() {
                   {t.kitchen} ({property.kitchenImages.length})
                 </button>
               )}
+              
+              {/* Washroom Button */}
               {property.washroomImages && property.washroomImages.length > 0 && (
                 <button
                   onClick={() => handleSpaceTypeChange("washroom")}
@@ -859,6 +1064,8 @@ export default function PropertyDetailsPage() {
                   {t.washroom} ({property.washroomImages.length})
                 </button>
               )}
+              
+              {/* Common Area Button */}
               {property.commonAreaImages && property.commonAreaImages.length > 0 && (
                 <button
                   onClick={() => handleSpaceTypeChange("commonArea")}
@@ -871,13 +1078,24 @@ export default function PropertyDetailsPage() {
                   {t.commonArea} ({property.commonAreaImages.length})
                 </button>
               )}
+              
+              {/* 360 View Button - Only for Tenant properties */}
+              {property.propertyType === "Tenant" && property.view360Available && (
+                <button
+                  onClick={() => window.open(property.view360Url, '_blank')}
+                  className="px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 md:py-3 rounded-lg text-xs sm:text-sm md:text-base font-semibold whitespace-nowrap transition-all bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 shadow-md"
+                >
+                  {t.view360}
+                </button>
+              )}
             </div>
           </div>
         </div>
       )}
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8">
+      <div className="px-4">
+      <div className="max-w-7xl mx-auto py-4 sm:py-6 md:py-8">
         <div className="grid lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2">
@@ -1268,6 +1486,10 @@ export default function PropertyDetailsPage() {
           </div>
         </div>
       </div>
+      </div>
+
+      {/* Subscribe Section */}
+      <SubscribeSection />
 
       {/* Contact Owner Form Modal */}
       <ContactOwnerForm 

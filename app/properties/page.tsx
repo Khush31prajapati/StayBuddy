@@ -4,6 +4,7 @@ import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import PropertyCard from "@/components/PropertyCard";
+import SubscribeSection from "@/components/SubscribeSection";
 import { Search, SlidersHorizontal, X, ChevronDown } from "lucide-react";
 
 const allProperties = [
@@ -907,6 +908,9 @@ function PropertiesPageContent() {
           </div>
         )}
       </div>
+
+      {/* Subscribe Section */}
+      <SubscribeSection />
     </div>
   );
 }

@@ -132,7 +132,7 @@ const properties = [
   },
 ];
 
-type PropertyType = "all" | "pg" | "flats";
+type PropertyType = "all" | "pg" | "tenant";
 
 export default function PropertyListings() {
   const { t } = useLanguage();
@@ -156,8 +156,16 @@ export default function PropertyListings() {
   const tabs = [
     { id: "all" as PropertyType, label: t("properties.allProperties") },
     { id: "pg" as PropertyType, label: t("filters.pg").toUpperCase() },
-    { id: "flats" as PropertyType, label: "Flats/Villa" },
+    { id: "tenant" as PropertyType, label: t("filters.tenant").toUpperCase() },
   ];
+
+  // Filter properties based on active tab
+  const filteredProperties = properties.filter((property) => {
+    if (activeTab === "all") return true;
+    if (activeTab === "pg") return property.type === "PG";
+    if (activeTab === "tenant") return property.type === "Tenant";
+    return true;
+  });
 
   return (
     <div className="px-4">
@@ -216,7 +224,7 @@ export default function PropertyListings() {
           msOverflowStyle: "none",
         }}
       >
-        {properties.map((property) => (
+        {filteredProperties.map((property) => (
           <div key={property.id} className="flex-shrink-0 w-[300px]">
             <PropertyCard {...property} />
           </div>

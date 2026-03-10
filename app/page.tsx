@@ -10,6 +10,7 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import RentingExperience from "@/components/RentingExperience";
 import OwnerSection from "@/components/OwnerSection";
 import CallToActionCards from "@/components/CallToActionCards";
+import SubscribeSection from "@/components/SubscribeSection";
 
 export default function HomePage() {
   const { t } = useLanguage();
@@ -85,6 +86,9 @@ export default function HomePage() {
 
       {/* Call to Action Cards */}
       <CallToActionCards />
+
+      {/* Subscribe Section */}
+      <SubscribeSection />
     </div>
   );
 }

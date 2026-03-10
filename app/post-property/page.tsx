@@ -108,6 +108,13 @@ export default function PostPropertyPage() {
   const [washroomImages, setWashroomImages] = useState<File[]>([]);
   const [commonAreaImages, setCommonAreaImages] = useState<File[]>([]);
   
+  // Tenant Room Images (without status)
+  const [tenantRoomImages, setTenantRoomImages] = useState<Array<{ id: string; name: string; file: File | null }>>([]);
+  const [tenantKitchenImages, setTenantKitchenImages] = useState<File[]>([]);
+  const [tenantWashroomImages, setTenantWashroomImages] = useState<File[]>([]);
+  const [tenantCommonAreaImages, setTenantCommonAreaImages] = useState<File[]>([]);
+  const [view360Url, setView360Url] = useState("");
+  
   const [error, setError] = useState("");
 
   const roomFacilities = [
@@ -356,6 +363,8 @@ export default function PostPropertyPage() {
       uploadInfo: "Accepted formats are .jpg, .jpeg, .gif, .bmp & .png | Minimum dimension allowed 600*400 Pixel | Maximum size allowed is 6 MB",
       roomsImages: "Rooms Images",
       roomsImagesSubtitle: "Upload images for each room and mark their availability status",
+      tenantRoomsImages: "Room Images",
+      tenantRoomsImagesSubtitle: "Upload images for each room in your property",
       addRoom: "Add Room",
       roomName: "Room Name",
       roomStatus: "Room Status",
@@ -366,6 +375,10 @@ export default function PostPropertyPage() {
       kitchenImages: "Kitchen Images",
       washroomImages: "Washroom Images",
       commonAreaImages: "Common Area Images",
+      view360Section: "360° Virtual Tour",
+      view360Subtitle: "Add a 360° virtual tour link for better property showcase",
+      view360Label: "360° View URL",
+      view360Placeholder: "Enter 360° virtual tour link (e.g., Matterport, Google Street View)",
       uploadImages: "Upload Images",
       imagesUploaded: "images uploaded",
       singleRoom: "Single Room",
@@ -587,6 +600,8 @@ export default function PostPropertyPage() {
       uploadInfo: "Formats acceptés: .jpg, .jpeg, .gif, .bmp et .png",
       roomsImages: "Images des chambres",
       roomsImagesSubtitle: "Téléchargez des images pour chaque chambre et marquez leur statut de disponibilité",
+      tenantRoomsImages: "Images des chambres",
+      tenantRoomsImagesSubtitle: "Téléchargez des images pour chaque chambre de votre propriété",
       addRoom: "Ajouter une chambre",
       roomName: "Nom de la chambre",
       roomStatus: "Statut de la chambre",
@@ -597,6 +612,10 @@ export default function PostPropertyPage() {
       kitchenImages: "Images de la cuisine",
       washroomImages: "Images de la salle de bain",
       commonAreaImages: "Images de l'espace commun",
+      view360Section: "Visite virtuelle 360°",
+      view360Subtitle: "Ajoutez un lien de visite virtuelle 360° pour une meilleure présentation",
+      view360Label: "URL de la vue 360°",
+      view360Placeholder: "Entrez le lien de la visite virtuelle 360° (ex: Matterport, Google Street View)",
       uploadImages: "Télécharger des images",
       imagesUploaded: "images téléchargées",
       singleRoom: "Chambre simple",
@@ -860,6 +879,50 @@ export default function PostPropertyPage() {
   const handleCommonAreaImageUpload = (files: FileList | null) => {
     if (files) {
       setCommonAreaImages(prev => [...prev, ...Array.from(files)]);
+    }
+  };
+  
+  // Tenant Room Image Handlers
+  const addTenantRoomImage = () => {
+    const newRoom = {
+      id: `tenant-room-${Date.now()}`,
+      name: `Room ${tenantRoomImages.length + 1}`,
+      file: null
+    };
+    setTenantRoomImages(prev => [...prev, newRoom]);
+  };
+
+  const removeTenantRoomImage = (id: string) => {
+    setTenantRoomImages(prev => prev.filter(room => room.id !== id));
+  };
+
+  const updateTenantRoomImage = (id: string, field: 'name', value: string) => {
+    setTenantRoomImages(prev => prev.map(room => 
+      room.id === id ? { ...room, [field]: value } : room
+    ));
+  };
+
+  const handleTenantRoomImageUpload = (id: string, file: File | null) => {
+    setTenantRoomImages(prev => prev.map(room => 
+      room.id === id ? { ...room, file } : room
+    ));
+  };
+
+  const handleTenantKitchenImageUpload = (files: FileList | null) => {
+    if (files) {
+      setTenantKitchenImages(prev => [...prev, ...Array.from(files)]);
+    }
+  };
+
+  const handleTenantWashroomImageUpload = (files: FileList | null) => {
+    if (files) {
+      setTenantWashroomImages(prev => [...prev, ...Array.from(files)]);
+    }
+  };
+
+  const handleTenantCommonAreaImageUpload = (files: FileList | null) => {
+    if (files) {
+      setTenantCommonAreaImages(prev => [...prev, ...Array.from(files)]);
     }
   };
 
@@ -2284,82 +2347,260 @@ export default function PostPropertyPage() {
                       </div>
                     </div>
                   ) : (
-                    // Tenant Property Image Upload (Original)
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                      {[
-                        { id: 'singleRoom', label: t.singleRoom },
-                        { id: 'buildingView', label: t.buildingView },
-                        { id: 'commonArea', label: t.commonArea },
-                        { id: 'commonAmenities', label: t.commonAmenities },
-                        { id: 'kitchen', label: t.kitchen },
-                        { id: 'neighbourhoodView', label: t.neighbourhoodView },
-                        { id: 'mapView', label: t.mapView }
-                      ].map((category) => (
-                        <div key={category.id} className="relative group">
-                          <input
-                            type="file"
-                            id={category.id}
-                            accept="image/*"
-                            multiple
-                            onChange={(e) => handleImageUpload(category.id, e.target.files)}
-                            className="hidden"
-                          />
-                          
-                          {uploadedImages[category.id].length > 0 ? (
-                            // Show uploaded images
-                            <div className="relative h-40 rounded-xl overflow-hidden border-2 border-primary">
-                              <img
-                                src={URL.createObjectURL(uploadedImages[category.id][0])}
-                                alt={category.label}
-                                className="w-full h-full object-cover"
-                              />
-                              {/* Overlay with image count and actions */}
-                              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2">
-                                <span className="text-white font-semibold text-sm">
-                                  {uploadedImages[category.id].length} {uploadedImages[category.id].length === 1 ? 'Image' : 'Images'}
-                                </span>
-                                <div className="flex gap-2">
-                                  <label
-                                    htmlFor={category.id}
-                                    className="px-3 py-1.5 bg-white hover:bg-gray-100 text-gray-700 rounded-lg text-xs font-medium cursor-pointer transition-colors"
-                                  >
-                                    Add More
+                    // Tenant Property Image Upload - New Structure
+                    <div className="space-y-6">
+                      {/* Room Images */}
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <h4 className="text-md font-semibold text-gray-800">{t.tenantRoomsImages}</h4>
+                            <p className="text-xs text-gray-500">{t.tenantRoomsImagesSubtitle}</p>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={addTenantRoomImage}
+                            className="px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg text-sm font-medium transition-colors"
+                          >
+                            + {t.addRoom}
+                          </button>
+                        </div>
+                        
+                        <div className="space-y-3">
+                          {tenantRoomImages.map((room) => (
+                            <div key={room.id} className="bg-gray-50 rounded-xl p-4 space-y-3">
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                {/* Room Name */}
+                                <div>
+                                  <label className="block text-xs font-medium text-gray-700 mb-1">
+                                    {t.roomName}
                                   </label>
-                                  <button
-                                    onClick={() => setUploadedImages(prev => ({ ...prev, [category.id]: [] }))}
-                                    className="px-3 py-1.5 bg-red-500 hover:bg-red-600 text-white rounded-lg text-xs font-medium transition-colors"
-                                  >
-                                    Remove All
-                                  </button>
+                                  <input
+                                    type="text"
+                                    value={room.name}
+                                    onChange={(e) => updateTenantRoomImage(room.id, 'name', e.target.value)}
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                                    placeholder="e.g., Master Bedroom, Living Room"
+                                  />
+                                </div>
+                                
+                                {/* Upload Image */}
+                                <div>
+                                  <label className="block text-xs font-medium text-gray-700 mb-1">
+                                    {t.uploadRoomImage}
+                                  </label>
+                                  <div className="flex gap-2">
+                                    <input
+                                      type="file"
+                                      id={`tenant-room-${room.id}`}
+                                      accept="image/*"
+                                      onChange={(e) => handleTenantRoomImageUpload(room.id, e.target.files?.[0] || null)}
+                                      className="hidden"
+                                    />
+                                    <label
+                                      htmlFor={`tenant-room-${room.id}`}
+                                      className={`flex-1 px-3 py-2 text-center text-sm font-medium rounded-lg cursor-pointer transition-colors ${
+                                        room.file 
+                                          ? 'bg-green-100 text-green-700 border border-green-300' 
+                                          : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                                      }`}
+                                    >
+                                      {room.file ? '✓ Uploaded' : 'Choose File'}
+                                    </label>
+                                    <button
+                                      type="button"
+                                      onClick={() => removeTenantRoomImage(room.id)}
+                                      className="px-3 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm font-medium transition-colors"
+                                    >
+                                      <X className="w-4 h-4" />
+                                    </button>
+                                  </div>
                                 </div>
                               </div>
-                              {/* Image counter badge */}
-                              {uploadedImages[category.id].length > 1 && (
-                                <div className="absolute top-2 right-2 bg-primary text-white px-2 py-1 rounded-full text-xs font-semibold">
-                                  +{uploadedImages[category.id].length - 1}
+                              
+                              {/* Preview Image */}
+                              {room.file && (
+                                <div className="relative h-32 rounded-lg overflow-hidden">
+                                  <img
+                                    src={URL.createObjectURL(room.file)}
+                                    alt={room.name}
+                                    className="w-full h-full object-cover"
+                                  />
+                                  <div className="absolute bottom-2 left-2 px-3 py-1 rounded-lg bg-primary/90 text-white text-xs font-semibold">
+                                    {room.name}
+                                  </div>
                                 </div>
                               )}
-                              {/* Category label */}
-                              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-2">
-                                <span className="text-white text-xs font-medium">{category.label}</span>
-                              </div>
                             </div>
-                          ) : (
-                            // Show upload box
-                            <label
-                              htmlFor={category.id}
-                              className="flex flex-col items-center justify-center h-40 bg-gray-100 rounded-xl border-2 border-dashed border-gray-300 hover:border-primary hover:bg-primary/5 cursor-pointer transition-all"
-                            >
-                              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-2">
-                                <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                                </svg>
-                              </div>
-                              <span className="text-xs font-medium text-gray-700 text-center px-2">{category.label}</span>
-                            </label>
+                          ))}
+                          
+                          {tenantRoomImages.length === 0 && (
+                            <div className="text-center py-8 text-gray-500 text-sm">
+                              No rooms added yet. Click "Add Room" to start.
+                            </div>
                           )}
                         </div>
-                      ))}
+                      </div>
+                      
+                      {/* Kitchen Images */}
+                      <div className="space-y-3">
+                        <h4 className="text-md font-semibold text-gray-800">{t.kitchenImages}</h4>
+                        <div className="relative">
+                          <input
+                            type="file"
+                            id="tenant-kitchen-images"
+                            accept="image/*"
+                            multiple
+                            onChange={(e) => handleTenantKitchenImageUpload(e.target.files)}
+                            className="hidden"
+                          />
+                          <label
+                            htmlFor="tenant-kitchen-images"
+                            className="flex flex-col items-center justify-center h-32 bg-gray-100 rounded-xl border-2 border-dashed border-gray-300 hover:border-primary hover:bg-primary/5 cursor-pointer transition-all"
+                          >
+                            <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-2">
+                              <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                              </svg>
+                            </div>
+                            <span className="text-sm font-medium text-gray-700">{t.uploadImages}</span>
+                            {tenantKitchenImages.length > 0 && (
+                              <span className="text-xs text-green-600 mt-1">{tenantKitchenImages.length} {t.imagesUploaded}</span>
+                            )}
+                          </label>
+                        </div>
+                        {tenantKitchenImages.length > 0 && (
+                          <div className="grid grid-cols-3 gap-2">
+                            {tenantKitchenImages.map((file, index) => (
+                              <div key={index} className="relative h-24 rounded-lg overflow-hidden group">
+                                <img src={URL.createObjectURL(file)} alt={`Kitchen ${index + 1}`} className="w-full h-full object-cover" />
+                                <button
+                                  type="button"
+                                  onClick={() => setTenantKitchenImages(prev => prev.filter((_, i) => i !== index))}
+                                  className="absolute top-1 right-1 w-6 h-6 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                                >
+                                  <X className="w-4 h-4" />
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                      
+                      {/* Washroom Images */}
+                      <div className="space-y-3">
+                        <h4 className="text-md font-semibold text-gray-800">{t.washroomImages}</h4>
+                        <div className="relative">
+                          <input
+                            type="file"
+                            id="tenant-washroom-images"
+                            accept="image/*"
+                            multiple
+                            onChange={(e) => handleTenantWashroomImageUpload(e.target.files)}
+                            className="hidden"
+                          />
+                          <label
+                            htmlFor="tenant-washroom-images"
+                            className="flex flex-col items-center justify-center h-32 bg-gray-100 rounded-xl border-2 border-dashed border-gray-300 hover:border-primary hover:bg-primary/5 cursor-pointer transition-all"
+                          >
+                            <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-2">
+                              <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                              </svg>
+                            </div>
+                            <span className="text-sm font-medium text-gray-700">{t.uploadImages}</span>
+                            {tenantWashroomImages.length > 0 && (
+                              <span className="text-xs text-green-600 mt-1">{tenantWashroomImages.length} {t.imagesUploaded}</span>
+                            )}
+                          </label>
+                        </div>
+                        {tenantWashroomImages.length > 0 && (
+                          <div className="grid grid-cols-3 gap-2">
+                            {tenantWashroomImages.map((file, index) => (
+                              <div key={index} className="relative h-24 rounded-lg overflow-hidden group">
+                                <img src={URL.createObjectURL(file)} alt={`Washroom ${index + 1}`} className="w-full h-full object-cover" />
+                                <button
+                                  type="button"
+                                  onClick={() => setTenantWashroomImages(prev => prev.filter((_, i) => i !== index))}
+                                  className="absolute top-1 right-1 w-6 h-6 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                                >
+                                  <X className="w-4 h-4" />
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                      
+                      {/* Common Area Images */}
+                      <div className="space-y-3">
+                        <h4 className="text-md font-semibold text-gray-800">{t.commonAreaImages}</h4>
+                        <div className="relative">
+                          <input
+                            type="file"
+                            id="tenant-common-area-images"
+                            accept="image/*"
+                            multiple
+                            onChange={(e) => handleTenantCommonAreaImageUpload(e.target.files)}
+                            className="hidden"
+                          />
+                          <label
+                            htmlFor="tenant-common-area-images"
+                            className="flex flex-col items-center justify-center h-32 bg-gray-100 rounded-xl border-2 border-dashed border-gray-300 hover:border-primary hover:bg-primary/5 cursor-pointer transition-all"
+                          >
+                            <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-2">
+                              <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                              </svg>
+                            </div>
+                            <span className="text-sm font-medium text-gray-700">{t.uploadImages}</span>
+                            {tenantCommonAreaImages.length > 0 && (
+                              <span className="text-xs text-green-600 mt-1">{tenantCommonAreaImages.length} {t.imagesUploaded}</span>
+                            )}
+                          </label>
+                        </div>
+                        {tenantCommonAreaImages.length > 0 && (
+                          <div className="grid grid-cols-3 gap-2">
+                            {tenantCommonAreaImages.map((file, index) => (
+                              <div key={index} className="relative h-24 rounded-lg overflow-hidden group">
+                                <img src={URL.createObjectURL(file)} alt={`Common Area ${index + 1}`} className="w-full h-full object-cover" />
+                                <button
+                                  type="button"
+                                  onClick={() => setTenantCommonAreaImages(prev => prev.filter((_, i) => i !== index))}
+                                  className="absolute top-1 right-1 w-6 h-6 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                                >
+                                  <X className="w-4 h-4" />
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                      
+                      {/* 360° Virtual Tour */}
+                      <div className="space-y-3">
+                        <div>
+                          <h4 className="text-md font-semibold text-gray-800">{t.view360Section}</h4>
+                          <p className="text-xs text-gray-500">{t.view360Subtitle}</p>
+                        </div>
+                        <div>
+                          <label className="block text-xs font-medium text-gray-700 mb-2">
+                            {t.view360Label}
+                          </label>
+                          <input
+                            type="url"
+                            value={view360Url}
+                            onChange={(e) => setView360Url(e.target.value)}
+                            placeholder={t.view360Placeholder}
+                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-primary transition-colors"
+                          />
+                          {view360Url && (
+                            <div className="mt-2 flex items-center gap-2 text-xs text-green-600">
+                              <Check className="w-4 h-4" />
+                              <span>360° view link added</span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   )}
                 </div>
