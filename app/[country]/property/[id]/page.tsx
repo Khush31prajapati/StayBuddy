@@ -146,6 +146,135 @@ const propertyData: { [key: string]: any } = {
     priceStatus: "below average",
     isNew: true
   },
+  // India properties
+  "101": {
+    id: "101",
+    title: "Premium PG in Navrangpura",
+    location: "Navrangpura, Ahmedabad, Gujarat",
+    fullAddress: "Navrangpura, Ahmedabad, Gujarat, India",
+    price: 15000,
+    deposit: 30000,
+    rooms: 1,
+    bathrooms: 1,
+    area: 25,
+    propertyType: "PG",
+    category: "PG",
+    pgFor: "Both",
+    preferredTenants: "Any",
+    rentalPeriod: "Monthly",
+    availableFrom: "ASAP",
+    images: [
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
+    ],
+    roomsAvailability: [
+      { id: "room1", name: "Bed 1", status: "available", image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop" }
+    ],
+    kitchenImages: [
+      { id: "kitchen1", name: "Kitchen", image: "https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=2068&auto=format&fit=crop" }
+    ],
+    washroomImages: [
+      { id: "wash1", name: "Washroom", image: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?q=80&w=2187&auto=format&fit=crop" }
+    ],
+    commonAreaImages: [
+      { id: "common1", name: "Common Area", image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=2070&auto=format&fit=crop" }
+    ],
+    description: "Premium PG accommodation in Navrangpura with all amenities included.",
+    amenities: ["WiFi", "Meals", "Laundry", "AC"],
+    rules: { smoking: "Not Allowed", pets: "Not Allowed" },
+    services: { electricity: "Included", water: "Included", meals: "Included" },
+    landlord: { name: "PG Owner", phone: "+91 12345 67890", email: "contact@pgowner.in" },
+    priceStatus: "above average",
+    isNew: true
+  },
+  "102": {
+    id: "102",
+    title: "Cozy 2BHK Apartment",
+    location: "Info City, Gandhinagar, Gujarat",
+    fullAddress: "Info City, Gandhinagar, Gujarat, India",
+    price: 25000,
+    deposit: 50000,
+    rooms: 2,
+    bathrooms: 2,
+    area: 75,
+    propertyType: "Tenant",
+    category: "Apartment",
+    rentalPeriod: "Monthly",
+    availableFrom: "ASAP",
+    images: [
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
+    ],
+    description: "Spacious 2BHK apartment ideal for families.",
+    amenities: ["WiFi", "Parking"],
+    rules: { pets: "Allowed" },
+    services: { electricity: "Included", water: "Included" },
+    landlord: { name: "Owner", phone: "+91 98765 43210", email: "owner@example.com" },
+    priceStatus: "average",
+    isNew: false
+  },
+  "103": {
+    id: "103",
+    title: "Student-Friendly PG",
+    location: "Vesu, Surat, Gujarat",
+    fullAddress: "Vesu, Surat, Gujarat, India",
+    price: 8500,
+    deposit: 17000,
+    rooms: 1,
+    bathrooms: 1,
+    area: 18,
+    propertyType: "PG",
+    category: "PG",
+    pgFor: "Students",
+    preferredTenants: "Student",
+    rentalPeriod: "Monthly",
+    availableFrom: "ASAP",
+    images: [
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
+    ],
+    roomsAvailability: [
+      { id: "room1", name: "Room A", status: "available", image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop" },
+      { id: "room2", name: "Room B", status: "sold", image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop" }
+    ],
+    description: "Affordable PG for students with meals and laundry.",
+    amenities: ["WiFi", "Meals", "Study Room"],
+    rules: { visitors: "Allowed", smoking: "Not Allowed" },
+    services: { electricity: "Included", water: "Included", meals: "2 meals/day" },
+    landlord: { name: "PG Owner", phone: "+91 11223 44556", email: "pgowner@surat.in" },
+    priceStatus: "below average",
+    isNew: true
+  },
+  "104": {
+    id: "104",
+    title: "Luxury Independent House",
+    location: "Alkapuri, Vadodara, Gujarat",
+    fullAddress: "Alkapuri, Vadodara, Gujarat, India",
+    price: 55000,
+    deposit: 110000,
+    rooms: 4,
+    bathrooms: 3,
+    area: 140,
+    propertyType: "Tenant",
+    category: "House",
+    rentalPeriod: "Monthly",
+    availableFrom: "ASAP",
+    images: [
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
+    ],
+    description: "Spacious luxury house with modern amenities.",
+    amenities: ["Pool", "Garden"],
+    rules: { pets: "Allowed" },
+    services: { electricity: "Included", water: "Included" },
+    landlord: { name: "House Owner", phone: "+91 66778 88990", email: "houseowner@vadodara.in" },
+    priceStatus: "above average",
+    isNew: false
+  },
   "202": {
     id: "202",
     title: "Spacious Studio Apartment",
@@ -691,7 +820,11 @@ export default function PropertyDetailsPage() {
   const monthText = translate('currency.perMonth');
 
   const propertyId = params.id as string;
+  const country = params.country as string;
   const property = propertyData[propertyId] || propertyData["1"];
+  
+  // Check if country is India (route uses "in"), but allow full name just in case
+  const isIndia = country?.toLowerCase() === 'in' || country?.toLowerCase() === 'india';
 
   const content = {
     en: {
@@ -950,8 +1083,8 @@ export default function PropertyDetailsPage() {
               priority
             />
             
-            {/* Room Status Overlay - Only for PG properties with room availability and rooms view */}
-            {property.propertyType === "PG" && selectedSpaceType === "rooms" && property.roomsAvailability && property.roomsAvailability[currentImageIndex] && (
+            {/* Room Status Overlay - Only for India, PG properties with room availability and rooms view */}
+            {isIndia && property.propertyType === "PG" && selectedSpaceType === "rooms" && property.roomsAvailability && property.roomsAvailability[currentImageIndex] && (
               <>
                 {/* Status Badge */}
                 <div className="absolute top-3 right-3 sm:top-4 sm:right-4 md:top-6 md:right-6 z-20">
@@ -966,11 +1099,20 @@ export default function PropertyDetailsPage() {
                   )}
                 </div>
 
-                {/* Sold Overlay */}
+                {/* Occupied Overlay - Only for occupied rooms */}
                 {property.roomsAvailability[currentImageIndex].status === "sold" && (
                   <div className="absolute inset-0 bg-red-900/40 flex items-center justify-center z-10">
                     <span className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold transform -rotate-12 opacity-60 drop-shadow-2xl">
                       {t.sold}
+                    </span>
+                  </div>
+                )}
+
+                {/* Vacant Overlay - Only for available rooms */}
+                {property.roomsAvailability[currentImageIndex].status === "available" && (
+                  <div className="absolute inset-0 bg-green-900/20 flex items-center justify-center z-10">
+                    <span className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold transform -rotate-12 opacity-40 drop-shadow-2xl">
+                      {t.available}
                     </span>
                   </div>
                 )}

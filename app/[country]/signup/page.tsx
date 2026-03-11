@@ -100,12 +100,16 @@ export default function SignupPage() {
   const tc = content[language];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-light via-white to-blue-50 flex items-center justify-center px-4 py-12">
+    <div 
+      className="min-h-screen flex items-center justify-center px-4 py-12 relative bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: `url('https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop')` }}
+    >
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="w-full max-w-3xl"
+        className="w-full max-w-3xl relative z-10"
       >
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <div className="text-center mb-8">
